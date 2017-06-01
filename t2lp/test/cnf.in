@@ -1,0 +1,9 @@
+[!Y](true(Y) | false(Y)).
+([!X][?Y](posc(X,Y) & true(Y)) | (negc(X,Y) & false(Y)) ) -> ok.
+[!Y](ok & un(Y) -> true(Y) & false(Y)).
+~~ok.
+
+{true,false,ok}
+
+<X@conj;Y@atom>
+

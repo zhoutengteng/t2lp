@@ -1,0 +1,46 @@
+%     [!x1!x2][?y1?y2?y3][((x1|y1)&(x2|~y1|y2)&(y3|y1)) | (y1 | y2 | ~y3)]
+%solutions: {y1,y2,y3}, {y1,y2,~y3}
+
+%x1:1 x2:2 y1:3 y2:4 y3:5
+
+atom(1..5).
+un(1..2).
+conj(1..3).
+disj(1..3).
+
+min_atom(1).
+max_atom(5).
+min_un(1).
+max_un(2).
+min_conj(1).
+max_conj(3).
+min_disj(1).
+max_disj(3).
+
+%(x1|y1)
+posc(1,1).
+posc(1,3).
+
+%(x2|~y1|y2)
+posc(2,2).
+negc(2,3).
+posc(2,4).
+
+%(y3|y1)
+posc(3,5).
+posc(3,3).
+
+
+%(y1)
+posd(1,3).
+
+%(y2)
+posd(2,4).
+
+%(~y3)
+negd(3,5).
+
+
+#hide.
+#show true/1.
+#show false/1.

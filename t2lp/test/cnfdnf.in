@@ -1,0 +1,12 @@
+[!Y](true(Y) | false(Y)).
+([!X][?Y]((posc(X,Y) & true(Y)) | (negc(X,Y) & false(Y))) ) -> okc.
+([?X2][!Y]((posd(X2,Y) -> true(Y)) & (negd(X2,Y) -> false(Y)) )) -> okd.
+[!Y](ok & un(Y) -> true(Y) & false(Y)).
+okc & okd -> ok.
+~~ok.
+
+
+{true,false,ok, okc,okd}
+
+<X@conj;X2@disj;Y@atom>
+

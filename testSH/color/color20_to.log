@@ -1,0 +1,401 @@
+
+gringo colorfactclaspD5_1.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(4) 
+
+Models     : 1+    
+Time        : 0.010  (Parsing: 0.009)
+ClaspD cost 0.218729 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV5_1.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.152453 seconds.
+
+gringo colorfactclaspD5_2.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+
+
+Models     : 1+    
+Time        : 0.012  (Parsing: 0.011)
+ClaspD cost 0.041042 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV5_2.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.006602 seconds.
+
+gringo colorfactclaspD5_3.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(2) color(1) 
+
+Models     : 1+    
+Time        : 0.014  (Parsing: 0.010)
+ClaspD cost 0.038215 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV5_3.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.011593 seconds.
+
+gringo colorfactclaspD5_4.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(1) 
+
+Models     : 1+    
+Time        : 0.013  (Parsing: 0.010)
+ClaspD cost 0.031828 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV5_4.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.006937 seconds.
+
+gringo colorfactclaspD5_5.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(3) color(1) 
+
+Models     : 1+    
+Time        : 0.009  (Parsing: 0.008)
+ClaspD cost 0.031159 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV5_5.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.012424 seconds.
+
+gringo colorfactclaspD10_1.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(8) color(3) color(2) color(1) 
+
+Models     : 1+    
+Time        : 0.055  (Parsing: 0.042)
+ClaspD cost 0.102931 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV10_1.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.013999 seconds.
+
+gringo colorfactclaspD10_2.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(7) color(6) color(5) color(4) 
+
+Models     : 1+    
+Time        : 0.056  (Parsing: 0.039)
+ClaspD cost 0.109907 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV10_2.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.118086 seconds.
+
+gringo colorfactclaspD10_3.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(10) color(8) color(7) color(6) color(4) color(2) color(1) 
+
+Models     : 1+    
+Time        : 0.054  (Parsing: 0.038)
+ClaspD cost 0.119347 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV10_3.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.101690 seconds.
+
+gringo colorfactclaspD10_4.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(9) color(8) color(6) color(5) color(4) color(3) color(2) 
+
+Models     : 1+    
+Time        : 0.058  (Parsing: 0.041)
+ClaspD cost 0.114723 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV10_4.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.021488 seconds.
+
+gringo colorfactclaspD10_5.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(7) color(3) color(1) 
+
+Models     : 1+    
+Time        : 0.061  (Parsing: 0.044)
+ClaspD cost 0.108254 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV10_5.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.010406 seconds.
+
+gringo colorfactclaspD15_1.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(15) color(13) color(11) color(9) color(5) color(4) color(3) color(2) color(1) 
+
+Models     : 1+    
+Time        : 0.226  (Parsing: 0.140)
+ClaspD cost 0.381817 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV15_1.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.072407 seconds.
+
+gringo colorfactclaspD15_2.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.196  (Parsing: 0.117)
+ClaspD cost 0.334830 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV15_2.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.040620 seconds.
+
+gringo colorfactclaspD15_3.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.188  (Parsing: 0.137)
+ClaspD cost 0.333743 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV15_3.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.501382 seconds.
+
+gringo colorfactclaspD15_4.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.217  (Parsing: 0.125)
+ClaspD cost 0.363567 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV15_4.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.241696 seconds.
+
+gringo colorfactclaspD15_5.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(15) color(13) color(12) color(8) color(7) color(4) color(3) color(2) color(1) 
+
+Models     : 1+    
+Time        : 0.218  (Parsing: 0.150)
+ClaspD cost 0.377222 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV15_5.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+{clr(2), clr(5), clr(6), clr(9), clr(10), clr(11), clr(14)}
+DLV cost 0.127187 seconds.
+
+gringo colorfactclaspD20_1.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.528  (Parsing: 0.359)
+ClaspD cost 1.018589 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV20_1.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 5.401150 seconds.
+
+gringo colorfactclaspD20_2.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(19) color(18) color(16) color(15) color(13) color(12) color(9) color(8) color(6) color(3) 
+
+Models     : 1+    
+Time        : 0.580  (Parsing: 0.340)
+ClaspD cost 1.054599 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV20_2.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+{clr(1), clr(3), clr(6), clr(7), clr(12), clr(13), clr(15), clr(16), clr(18), clr(19)}
+DLV cost 5.959893 seconds.
+
+gringo colorfactclaspD20_3.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.804  (Parsing: 0.348)
+ClaspD cost 1.277255 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV20_3.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 14.463127 seconds.
+
+gringo colorfactclaspD20_4.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.590  (Parsing: 0.316)
+ClaspD cost 1.160757 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV20_4.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 27.009593 seconds.
+
+gringo colorfactclaspD20_5.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.679  (Parsing: 0.401)
+ClaspD cost 1.116925 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV20_5.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 3.000293 seconds.
+
+gringo colorfactclaspD25_1.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 1.053  (Parsing: 0.718)
+ClaspD cost 2.044623 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV25_1.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 60.002293 seconds.
+
+gringo colorfactclaspD25_2.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 1.157  (Parsing: 0.720)
+ClaspD cost 2.150756 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV25_2.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 47.003642 seconds.
+
+gringo colorfactclaspD25_3.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(21) color(19) color(18) color(17) color(16) color(15) color(14) color(13) color(9) color(8) color(4) color(2) color(1) 
+
+Models     : 1+    
+Time        : 1.458  (Parsing: 0.723)
+ClaspD cost 2.438474 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV25_3.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+{clr(1), clr(2), clr(4), clr(5), clr(8), clr(9), clr(14), clr(15), clr(16), clr(17), clr(18), clr(19), clr(21)}
+DLV cost 22.942054 seconds.
+
+gringo colorfactclaspD25_4.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.870  (Parsing: 0.722)
+ClaspD cost 1.955365 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV25_4.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 60.002484 seconds.
+
+gringo colorfactclaspD25_5.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(24) color(21) color(20) color(18) color(15) color(12) color(9) color(7) color(6) color(5) color(4) color(3) 
+
+Models     : 1+    
+Time        : 1.495  (Parsing: 0.739)
+ClaspD cost 2.430517 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV25_5.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+{clr(3), clr(4), clr(5), clr(6), clr(7), clr(9), clr(12), clr(15), clr(18), clr(20), clr(21), clr(24)}
+DLV cost 7.687285 seconds.
+
+gringo colorfactclaspD30_1.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(26) color(23) color(22) color(21) color(20) color(19) color(18) color(17) color(16) color(13) color(12) color(11) color(10) color(9) color(7) color(5) color(4) color(2) color(1) 
+
+Models     : 1+    
+Time        : 2.507  (Parsing: 1.303)
+ClaspD cost 4.545908 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV30_1.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 60.001806 seconds.
+
+gringo colorfactclaspD30_2.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 2.437  (Parsing: 1.401)
+ClaspD cost 4.565153 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV30_2.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 60.002501 seconds.
+
+gringo colorfactclaspD30_3.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(30) color(28) color(27) color(25) color(22) color(21) color(20) color(15) color(12) color(9) color(6) color(5) color(2) 
+
+Models     : 1+    
+Time        : 2.745  (Parsing: 1.334)
+ClaspD cost 4.724353 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV30_3.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+{clr(1), clr(3), clr(4), clr(7), clr(8), clr(10), clr(11), clr(13), clr(14), clr(16), clr(17), clr(18), clr(19), clr(23), clr(24), clr(26), clr(29)}
+DLV cost 25.409383 seconds.
+
+gringo colorfactclaspD30_4.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+Answer: 1
+color(30) color(25) color(23) color(22) color(15) color(14) color(13) color(12) color(11) color(10) color(9) color(8) color(7) color(6) color(5) color(4) color(1) 
+
+Models     : 1+    
+Time        : 3.967  (Parsing: 1.329)
+ClaspD cost 6.002993 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV30_4.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 60.002553 seconds.
+
+gringo colorfactclaspD30_5.lp color_claspD.lp | claspD  >> color20_to.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 2.042  (Parsing: 1.337)
+ClaspD cost 4.274048 seconds.
+
+timeout 60 ./dlv -n=1 -filter=clr colorfactDLV30_5.lp color_dlv.lp >> color20_to.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 60.002063 seconds.

@@ -1,0 +1,50 @@
+#maxint=1024.
+#const n=10.
+#const m=6.
+#const k=10.
+#const l=10.
+posd(1,3).
+posd(1,5).
+posd(2,5).
+posd(3,3).
+posd(3,5).
+negd(4,8).
+negd(4,3).
+posd(5,2).
+posd(6,2).
+negd(7,6).
+negd(8,9).
+posd(8,6).
+posd(9,6).
+negd(10,10).
+negd(10,1).
+posc(1,2).
+negc(1,4).
+posc(1,6).
+negc(2,5).
+negc(2,10).
+negc(2,7).
+posc(3,5).
+posc(4,10).
+posc(4,2).
+posc(4,7).
+posc(5,8).
+posc(5,10).
+negc(6,4).
+negc(6,5).
+posc(6,7).
+negc(6,2).
+negc(7,10).
+negc(7,2).
+posc(7,5).
+posc(7,8).
+negc(8,4).
+posc(8,3).
+negc(8,10).
+posc(8,9).
+negc(9,9).
+posc(9,1).
+posc(10,7).
+posc(10,2).
+negc(10,1).
+posc(10,4).

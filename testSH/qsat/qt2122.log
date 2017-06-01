@@ -1,0 +1,360 @@
+
+gringo qsatclaspD5_1.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.092  (Parsing: 0.075)
+ClaspD cost 0.227358 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv5_1.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.128299 seconds.
+
+gringo qsatclaspD5_2.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.113  (Parsing: 0.090)
+ClaspD cost 0.243498 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv5_2.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.013404 seconds.
+
+gringo qsatclaspD5_3.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.101  (Parsing: 0.088)
+ClaspD cost 0.258876 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv5_3.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.013676 seconds.
+
+gringo qsatclaspD5_4.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.091  (Parsing: 0.077)
+ClaspD cost 0.226920 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv5_4.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.012984 seconds.
+
+gringo qsatclaspD5_5.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.090  (Parsing: 0.079)
+ClaspD cost 0.244430 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv5_5.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.015266 seconds.
+
+gringo qsatclaspD10_1.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.983  (Parsing: 0.752)
+ClaspD cost 1.468560 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv10_1.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.017493 seconds.
+
+gringo qsatclaspD10_2.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.930  (Parsing: 0.733)
+ClaspD cost 1.390296 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv10_2.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.053771 seconds.
+
+gringo qsatclaspD10_3.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.883  (Parsing: 0.736)
+ClaspD cost 1.353773 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv10_3.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.032944 seconds.
+
+gringo qsatclaspD10_4.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 1.003  (Parsing: 0.806)
+ClaspD cost 1.502902 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv10_4.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.032366 seconds.
+
+gringo qsatclaspD10_5.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 0.927  (Parsing: 0.774)
+ClaspD cost 1.440097 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv10_5.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.059832 seconds.
+
+gringo qsatclaspD15_1.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 4.453  (Parsing: 3.367)
+ClaspD cost 5.854742 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv15_1.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.077141 seconds.
+
+gringo qsatclaspD15_2.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 6.619  (Parsing: 3.403)
+ClaspD cost 8.020675 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv15_2.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.038280 seconds.
+
+gringo qsatclaspD15_3.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 5.075  (Parsing: 3.261)
+ClaspD cost 6.513380 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv15_3.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.083510 seconds.
+
+gringo qsatclaspD15_4.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 4.325  (Parsing: 3.279)
+ClaspD cost 5.862087 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv15_4.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.051888 seconds.
+
+gringo qsatclaspD15_5.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 4.185  (Parsing: 3.257)
+ClaspD cost 5.495300 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv15_5.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.094733 seconds.
+
+gringo qsatclaspD20_1.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 19.543 (Parsing: 10.622)
+ClaspD cost 22.604744 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv20_1.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.076669 seconds.
+
+gringo qsatclaspD20_2.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 15.830 (Parsing: 10.675)
+ClaspD cost 19.135863 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv20_2.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.107524 seconds.
+
+gringo qsatclaspD20_3.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 17.557 (Parsing: 10.619)
+ClaspD cost 20.300777 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv20_3.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.428427 seconds.
+
+gringo qsatclaspD20_4.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 12.706 (Parsing: 10.655)
+ClaspD cost 15.568596 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv20_4.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 4.052193 seconds.
+
+gringo qsatclaspD20_5.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 15.643 (Parsing: 10.695)
+ClaspD cost 18.702116 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv20_5.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.070579 seconds.
+
+gringo qsatclaspD25_1.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 63.799 (Parsing: 28.994)
+ClaspD cost 69.519138 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv25_1.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.121234 seconds.
+
+gringo qsatclaspD25_2.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 36.503 (Parsing: 29.067)
+ClaspD cost 42.265927 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv25_2.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.133638 seconds.
+
+gringo qsatclaspD25_3.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 35.412 (Parsing: 29.838)
+ClaspD cost 40.956032 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv25_3.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 6.053840 seconds.
+
+gringo qsatclaspD25_4.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 46.494 (Parsing: 30.148)
+ClaspD cost 52.142383 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv25_4.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.137989 seconds.
+
+gringo qsatclaspD25_5.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 39.935 (Parsing: 29.873)
+ClaspD cost 46.226296 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv25_5.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.359344 seconds.
+
+gringo qsatclaspD30_1.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 95.007 (Parsing: 74.389)
+ClaspD cost 105.720002 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv30_1.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 60.006387 seconds.
+
+gringo qsatclaspD30_2.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 197.023 (Parsing: 68.134)
+ClaspD cost 207.211320 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv30_2.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 0.511712 seconds.
+
+gringo qsatclaspD30_3.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 92.456 (Parsing: 69.168)
+ClaspD cost 102.509515 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv30_3.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 60.007132 seconds.
+
+gringo qsatclaspD30_4.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 83.772 (Parsing: 69.927)
+ClaspD cost 93.736784 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv30_4.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 2.023861 seconds.
+
+gringo qsatclaspD30_5.lp qsat_claspD.lp | claspD  >> qt2122.log
+claspD version 1.1.4. Reading...done
+
+Models     : 0     
+Time        : 80.630 (Parsing: 68.540)
+ClaspD cost 90.558927 seconds.
+
+timeout 60 ./dlv -n=1 -filter=true qsatdlv30_5.lp qsat_dlv.lp >> qt2122.log
+DLV [build BEN/Oct 11 2007   gcc 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)]
+
+DLV cost 4.056941 seconds.

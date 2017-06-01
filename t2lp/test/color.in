@@ -1,0 +1,10 @@
+([!X]((color(X)|color_(X))))&([!X]((set(X)|set_(X)))).
+([!X][!Y]((~eq(X,Y))-> (set_(X) | set_(Y))))->ok.
+([?X][?Y](((set(X)&set(Y))&~eq(X,Y))&~edge(X,Y)))->ok.
+([?X](set_(X)&[!Y]((set_(Y)|edge(X,Y)))))->ok.
+([?X][?Y](((set(X)&set(Y))&(color(X)&color_(Y)))))->ok.
+[!X]((ok->(set(X)&set_(X)))).
+~~ok.
+
+{ok, color_, color, set, set_}
+<X@vtx;Y@vtx>

@@ -1,0 +1,5 @@
+[!X][!Y][?Z](set(X,Y) -> (cvr(Z)&set(Z,Y))).
+
+{cvr}
+
+<X@i;Y@e;Z@i>

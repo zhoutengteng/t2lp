@@ -1,0 +1,10 @@
+vtx(1..2).
+edge(1,2). edge(2,1).
+
+min_vtx(1).
+max_vtx(2).
+
+
+
+#hide.
+#show color/1.

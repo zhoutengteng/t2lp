@@ -1,0 +1,714 @@
+========================================
+~TRUE => FALSE
+~FALSE => TRUE
+~~~fml => ~fml
+~(F ^ G) => ~F v ~G
+~(F v G) => ~F ^ ~G
+~(F -> G) => ~~F ^ ~G
+~~(p|~q)  =>  ~~p | ~q
+~~(p&~q)  =>  ~~p & ~q
+~~(p->~q)  =>  ~p | ~q
+
+========================================
+
+
+========================================
+[!X]([!Y]([!NV_0]([!NV_1]((((succ_vtx_vtx(X,Y,NV_0,NV_1)&s_0(NV_0,NV_1))|((~eq(X,Y)->(~~set_(X)|~~set_(Y)))->~~ok))->s_0(X,Y))))))
+
+
+
+
+
+============true & a -> b.===============
+(a->b)
+
+
+============false & a -> b.=============
+
+
+
+============(~~a) & b -> c.=============
+(b->(~a|c))
+
+
+============(a | b) & c -> d.===========
+((a&c)->d)
+((b&c)->d)
+
+
+============(a->b)&c->d. ===============
+((~a&c)->d)
+((b&c)->d)
+(c->((a|~b)|d))
+
+
+============true->(~~ok).===============
+(~ok->(FALSE))
+
+
+
+
+============(a & (m&(n->q))) -> (c & d)========(((n->q)&(m&a))->(c&d))
+
+(~(n) & (m&a)) -> (c&d).
+(q & (m&a)) -> (c&d).
+(m&a)->n | (~q) | (c&d).
+
+simple as:
+
+((~n&(m&a))->c)
+((~n&(m&a))->d)
+((q&(m&a))->c)
+((q&(m&a))->d)
+((m&a)->(c|(n|~q)))
+((m&a)->(d|(n|~q)))
+
+
+
+============((a&(m|(n->q)))->(c&d)) ===========(((m|(n->q))&a)->(c&d))
+((m&a)->c)
+((m&a)->d)
+((~n&a)->c)
+((~n&a)->d)
+((q&a)->c)
+((q&a)->d)
+(a->(c|(n|~q)))
+(a->(d|(n|~q)))
+
+
+
+===========t(X,Y) & succ(Y,Z) -> t(X,Z) | ((set_(X) & (set_(Z) | edge(X, Z))) -> ok).=======
+((t(X,Y)&succ(Y,Z))->(((set_(X)&(set_(Z)|edge(X,Z)))->ok)|t(X,Z)))
+
+simple as
+
+((set_(X)&(set_(Z)|edge(X,Z))) & (t(X,Y)&succ(Y,Z))) -> (ok | t(X,Z))
+((~ok) & ((t(X,Y)&succ(Y,Z)))-> (~(set_(X)&(set_(Z)|edge(X,Z)))) | t(X,Z)
+
+simple as
+
+((set_(X)&(set_(Z)|edge(X,Z))) & (t(X,Y)&succ(Y,Z))) -> (ok | t(X,Z))
+((~ok) & ((t(X,Y)&succ(Y,Z)))-> ((~set_(X) | (~set_(Z)& ~edge(X,Z)))) | t(X,Z)
+
+simple as
+
+((set_(X)&(edge(X,Z))) & (t(X,Y)&succ(Y,Z))) -> (ok | t(X,Z))
+((set_(X)&(set_(Z))) & (t(X,Y)&succ(Y,Z))) -> (ok | t(X,Z))
+((~ok) & ((t(X,Y)&succ(Y,Z)))-> ((~set_(X) | (~set_(Z)))) | t(X,Z)
+((~ok) & ((t(X,Y)&succ(Y,Z)))-> ((~set_(X) | (~edge(X,Z)))) | t(X,Z)
+
+
+
+
+===========t(X,MIN) | ((set_(X) & (set_(MIN) | edge(X, MIN)))) -> ok.===================
+simple as
+
+t(X,MIN)  -> ok.
+((set_(X) & (set_(MIN) | edge(X, MIN))) -> ok.
+
+simple as
+t(X,MIN)  -> ok.
+set_(X) & set_(MIN)  -> ok.
+set_(X) & edge(X, MIN) -> ok.
+
+
+===================t(X,MIN) | ((set_(X) & (set_(MIN) | edge(X, MIN))) -> ok).==============
+t(X,MIN) | (set_(X) & set_(MIN)) -> ok).
+t(X,MIN) | (set_(X) & edge(X,MIN)) -> ok).
+
+simple as
+
+true -> ((set_(X) & set_(MIN)) -> ok) | t(X,MIN).
+true -> ((set_(X) & edge(X,MIN)) -> ok) | t(X,MIN).
+
+simple as
+
+true & (set_(X) & set_(MIN)) -> ok | t(X,MIN).
+true & ~ok   ->  ~set_(X) | ~set_(MIN) | t(X,MIN)
+true & (set_(X) & edge(X,MIN)) -> ok | t(X,MIN).
+true & ~ok   ->  ~set_(X) | ~edge(X,MIN) | t(X,MIN)
+
+
+==============succ_vtx_vtx(A,B1,A,B2):- succ_vtx(B1,B2), vtx(A), vtx(B1), vtx(B2).==========
+==============succ_vtx_vtx(A1,MAX_vtx,A2,MIN_vtx):- succ_vtx(A1,A2), vtx(A1), vtx(A2).======
+==============succ_vtx(A1,A2):- A1==A2-1, vtx(A1), vtx(A2).=================================
+succ_vtx(4,5).
+succ_vtx(3,4).
+succ_vtx(2,3).
+succ_vtx(1,2).
+succ_vtx_vtx(5,1,5,2).
+succ_vtx_vtx(4,1,4,2).
+succ_vtx_vtx(3,1,3,2).
+succ_vtx_vtx(2,1,2,2).
+succ_vtx_vtx(1,1,1,2).
+
+succ_vtx_vtx(5,2,5,3).
+succ_vtx_vtx(4,2,4,3).
+succ_vtx_vtx(3,2,3,3).
+succ_vtx_vtx(2,2,2,3).
+succ_vtx_vtx(1,2,1,3).
+
+succ_vtx_vtx(5,3,5,4).
+succ_vtx_vtx(4,3,4,4).
+succ_vtx_vtx(3,3,3,4).
+succ_vtx_vtx(2,3,2,4).
+succ_vtx_vtx(1,3,1,4).
+
+succ_vtx_vtx(5,4,5,5).
+succ_vtx_vtx(4,4,4,5).
+succ_vtx_vtx(3,4,3,5).
+succ_vtx_vtx(2,4,2,5).
+succ_vtx_vtx(1,4,1,5).
+
+succ_vtx_vtx(1,5,2,1).
+succ_vtx_vtx(2,5,3,1).
+succ_vtx_vtx(3,5,4,1).
+succ_vtx_vtx(4,5,5,1).
+
+
+
+==============================================
+succ_vtx_vtx_vtx(A,B,C1,A,B,C2):- succ_vtx(C1,C2), vtx(A), vtx(B), vtx(C1), vtx(C2).
+succ_vtx_vtx_vtx(A,B1,MAX_vtx,A,B2,MIN_vtx):- succ_vtx(B1,B2), vtx(A), vtx(B1), vtx(B2).
+succ_vtx_vtx_vtx(A1,MAX_vtx,MAX_vtx,A2,MIN_vtx,MIN_vtx):- succ_vtx(A1,A2), vtx(A1), vtx(A2).
+succ_vtx(A1,A2):- A1==A2-1, vtx(A1), vtx(A2).
+
+
+
+equal as
+succ_vtx(2,3).
+succ_vtx(1,2).
+succ_vtx_vtx_vtx(3,3,1,3,3,2).
+succ_vtx_vtx_vtx(3,2,1,3,2,2).
+succ_vtx_vtx_vtx(3,1,1,3,1,2).
+succ_vtx_vtx_vtx(2,3,1,2,3,2).
+succ_vtx_vtx_vtx(2,2,1,2,2,2).
+succ_vtx_vtx_vtx(2,1,1,2,1,2).
+succ_vtx_vtx_vtx(1,3,1,1,3,2).
+succ_vtx_vtx_vtx(1,2,1,1,2,2).
+succ_vtx_vtx_vtx(1,1,1,1,1,2).
+
+
+succ_vtx_vtx_vtx(3,3,2,3,3,3).
+succ_vtx_vtx_vtx(3,2,2,3,2,3).
+succ_vtx_vtx_vtx(3,1,2,3,1,3).
+succ_vtx_vtx_vtx(2,3,2,2,3,3).
+succ_vtx_vtx_vtx(2,2,2,2,2,3).
+succ_vtx_vtx_vtx(2,1,2,2,1,3).
+succ_vtx_vtx_vtx(1,3,2,1,3,3).
+succ_vtx_vtx_vtx(1,2,2,1,2,3).
+succ_vtx_vtx_vtx(1,1,2,1,1,3).
+
+%succ_vtx_vtx_vtx(A,B1,MAX_vtx,A,B2,MIN_vtx):- succ_vtx(B1,B2), vtx(A), vtx(B1), vtx(B2).
+succ_vtx_vtx_vtx(3,1,3,3,2,1).
+succ_vtx_vtx_vtx(2,1,3,2,2,1).
+succ_vtx_vtx_vtx(1,1,3,1,2,1).
+
+succ_vtx_vtx_vtx(3,2,3,3,3,1).
+succ_vtx_vtx_vtx(2,2,3,2,3,1).
+succ_vtx_vtx_vtx(1,2,3,1,3,1).
+
+%succ_vtx_vtx_vtx(A1,MAX_vtx,MAX_vtx,A2,MIN_vtx,MIN_vtx):- succ_vtx(A1,A2), vtx(A1), vtx(A2).
+succ_vtx_vtx_vtx(1,3,3,2,1,1).
+succ_vtx_vtx_vtx(2,3,3,3,1,1).
+
+==============================================
+
+
+
+
+
+
+
+
+=========================([!X]((color(X)|color_(X)))&[!X]((set(X)|set_(X))))=============
+equal as
+
+[!X](((color(X)|color_(X))&(set(X)|set_(X))))
+
+
+
+
+=========================([?X]((set_(X)&[!Y]((set_(Y)|edge(X,Y)))))->ok)==================
+equal as
+
+[!X]([?Y](((set_(X)&(set_(Y)|edge(X,Y)))->ok)))
+
+
+
+===============([! X] (( color ( X ) | color_ ( X ) ))) & ([! X] (( set ( X ) | set_( X ) ))).====
+===============([!X]([!Y]((~eq(X,Y))-> (set_(X) | set_(Y)))))->ok.================================
+eqal as 
+
+[!X]([?PN_0]([?Y]((((color(X)|color_(X))&(set(X)|set_(X)))&((~eq(PN_0,Y)->(set_(PN_0)|set_(Y)))->ok)))))
+
+
+
+===============([?X]([?Y]((((set(X)&set(Y))&~eq(X,Y))&~edge(X,Y))))->ok)=====================
+equal as
+
+[!X]([!Y](((((set(X)&set(Y))&~eq(X,Y))&~edge(X,Y))->ok)))
+
+
+
+
+=========================================
+[!X]((color(X)|color_(X))).
+[!X]((set(X)|set_(X))).
+([!X][!Y]((~eq(X,Y))-> (set_(X) | set_(Y))))->ok.
+([?X][?Y](((set(X)&set(Y))&~eq(X,Y))&~edge(X,Y)))->ok.
+([?X](set_(X)&[!Y]((set_(Y)|edge(X,Y)))))->ok.
+([?X][?Y](((set(X)&set(Y))&(color(X)&color_(Y)))))->ok.
+[!X]((ok->(set(X)&set_(X)))).
+~~ok.
+
+{ok, color_, color, set, set_}
+<X@vtx;Y@vtx>
+
+
+===========================================
+
+
+
+==========================================
+[!X]((color(X)|color_(X))).
+[!X]((set(X)|set_(X))).
+[?X]([?Y](((~eq(X,Y)->(set_(X)|set_(Y)))->ok))).
+[!X]([!Y](((((set(X)&set(Y))&~eq(X,Y))&~edge(X,Y))->ok))).
+[!X]([?Y](((set_(X)&(set_(Y)|edge(X,Y)))->ok))).
+[!X]([!Y]((((set(X)&set(Y))&(color(X)&color_(Y)))->ok))).
+[!X]((ok->(set(X)&set_(X)))).
+~~ok.
+
+{ok, color_, color, set, set_}
+<X@vtx;Y@vtx>
+
+==>
+Answer: 1
+color(2) color(1) 
+Answer: 2
+color(3) color(1) 
+Answer: 3
+color(3) color(2) color(1) 
+Answer: 4
+color(4) color(2) color(1) 
+Answer: 5
+color(4) color(3) color(2) color(1) 
+Answer: 6
+color(4) color(2) 
+Answer: 7
+color(4) color(3) color(2) 
+Answer: 8
+color(4) color(3) color(1) 
+Answer: 9
+color(5) color(3) color(1) 
+Answer: 10
+color(5) color(1) 
+Answer: 11
+color(5) color(4) color(2) 
+Answer: 12
+color(5) color(2) 
+Answer: 13
+color(5) color(4) color(3) 
+Answer: 14
+color(5) color(3) 
+Answer: 15
+color(5) 
+Answer: 16
+color(5) color(4) 
+
+Models     : 16
+
+============================================
+
+
+==========================================
+[!X1]((color(X1)|color_(X1))).
+[!X2]((set(X2)|set_(X2))).
+[?X3]([?Y3](((~eq(X3,Y3)->(set_(X3)|set_(Y3)))->ok))).
+[!X4]([!Y4](((((set(X4)&set(Y4))&~eq(X4,Y4))&~edge(X4,Y4))->ok))).
+[!X5]([?Y5](((set_(X5)&(set_(Y5)|edge(X5,Y5)))->ok))).
+[!X6]([!Y]((((set(X6)&set(Y))&(color(X6)&color_(Y)))->ok))).
+[!X]((ok->(set(X)&set_(X)))).
+~~ok.
+
+{ok, color_, color, set, set_}
+<X@vtx;Y@vtx;X1@vtx;Y1@vtx;X2@vtx;Y2@vtx;X3@vtx;Y3@vtx;X4@vtx;Y4@vtx;X5@vtx;Y5@vtx;X6@vtx;Y6@vtx;X7@vtx;Y7@vtx>
+
+
+==>
+Answer: 1
+color(2) color(1) 
+Answer: 2
+color(3) color(1) 
+Answer: 3
+color(3) color(2) color(1) 
+Answer: 4
+color(4) color(2) color(1) 
+Answer: 5
+color(4) color(3) color(2) color(1) 
+Answer: 6
+color(4) color(2) 
+Answer: 7
+color(4) color(3) color(2) 
+Answer: 8
+color(4) color(3) color(1) 
+Answer: 9
+color(5) color(3) color(1) 
+Answer: 10
+color(5) color(1) 
+Answer: 11
+color(5) color(4) color(2) 
+Answer: 12
+color(5) color(2) 
+Answer: 13
+color(5) color(4) color(3) 
+Answer: 14
+color(5) color(3) 
+Answer: 15
+color(5) 
+Answer: 16
+color(5) color(4) 
+
+Models     : 16
+
+=========================================
+
+
+
+
+=========================================
+[!X1]((color(X1)|color_(X1))).
+
+[!X2][?X3][?Y3](((set(X2)|set_(X2))) & ((~eq(X3,Y3)->(set_(X3)|set_(Y3)))->ok)).
+[!X4]([!Y4](((((set(X4)&set(Y4))&~eq(X4,Y4))&~edge(X4,Y4))->ok))).
+[!X5]([?Y5](((set_(X5)&(set_(Y5)|edge(X5,Y5)))->ok))).
+[!X6]([!Y]((((set(X6)&set(Y))&(color(X6)&color_(Y)))->ok))).
+[!X]((ok->(set(X)&set_(X)))).
+~~ok.
+
+{ok, color_, color, set, set_}
+<X@vtx;Y@vtx;X1@vtx;Y1@vtx;X2@vtx;Y2@vtx;X3@vtx;Y3@vtx;X4@vtx;Y4@vtx;X5@vtx;Y5@vtx;X6@vtx;Y6@vtx;X7@vtx;Y7@vtx>
+
+==>
+
+error.
+
+Answer: 1
+color(2) 
+Answer: 2
+color(2) color(1) 
+Answer: 3
+color(3) 
+Answer: 4
+color(3) color(1) 
+Answer: 5
+color(3) color(2) 
+Answer: 6
+color(3) color(2) color(1) 
+Answer: 7
+color(4) color(2) 
+Answer: 8
+color(4) color(2) color(1) 
+Answer: 9
+color(4) color(3) color(2) color(1) 
+Answer: 10
+color(4) color(3) color(2) 
+Answer: 11
+color(4) color(3) 
+Answer: 12
+color(4) color(3) color(1) 
+Answer: 13
+color(5) color(2) 
+Answer: 14
+color(5) color(2) color(1) 
+Answer: 15
+color(5) color(4) color(2) color(1) 
+Answer: 16
+color(5) color(4) color(2) 
+Answer: 17
+color(5) color(4) color(3) color(1) 
+Answer: 18
+color(5) color(4) color(3) 
+Answer: 19
+color(5) color(3) 
+Answer: 20
+color(5) color(3) color(1) 
+Answer: 21
+color(5) 
+Answer: 22
+color(5) color(1) 
+Answer: 23
+color(5) color(4) 
+Answer: 24
+color(5) color(4) color(1) 
+
+Models     : 24
+=======================================
+
+
+
+=======================================
+[!X1]((color(X1)|color_(X1))).
+[!X2]((set(X2)|set_(X2))).
+
+[!X4]([!Y4](((((set(X4)&set(Y4))&~eq(X4,Y4))&~edge(X4,Y4))->ok))).
+[!X5]([?Y5](((set_(X5)&(set_(Y5)|edge(X5,Y5)))->ok))).
+[!X6]([!Y]((((set(X6)&set(Y))&(color(X6)&color_(Y)))->ok))).
+[!X]((ok->(set(X)&set_(X)))).
+~~ok.
+
+{ok, color_, color, set, set_}
+<X@vtx;Y@vtx;X1@vtx;Y1@vtx;X2@vtx;Y2@vtx;X3@vtx;Y3@vtx;X4@vtx;Y4@vtx;X5@vtx;Y5@vtx;X6@vtx;Y6@vtx;X7@vtx;Y7@vtx>
+
+==>
+
+
+Answer: 1
+color(2) color(1) 
+Answer: 2
+color(3) color(2) color(1) 
+Answer: 3
+color(3) color(1) 
+Answer: 4
+color(4) color(3) color(2) color(1) 
+Answer: 5
+color(4) color(2) color(1) 
+Answer: 6
+color(4) color(2) 
+Answer: 7
+color(4) color(3) color(2) 
+Answer: 8
+color(4) color(3) color(1) 
+Answer: 9
+color(5) color(3) color(1) 
+Answer: 10
+color(5) color(1) 
+Answer: 11
+color(5) color(4) color(2) 
+Answer: 12
+color(5) color(2) 
+Answer: 13
+color(5) color(4) color(3) 
+Answer: 14
+color(5) color(3) 
+Answer: 15
+color(5) 
+Answer: 16
+color(5) color(4) 
+
+Models     : 16 
+
+===========================================
+
+
+
+
+===========================================
+[!X1]([!X2]([!X4]([!Y4]([!X6]([!Y]([!X](((((((color(X1)|color_(X1))&(set(X2)|set_(X2)))&((((set(X4)&set(Y4))&~eq(X4,Y4))&~edge(X4,Y4))->ok))&(((set(X6)&set(Y))&(color(X6)&color_(Y)))->ok))&(ok->(set(X)&set_(X))))&~~ok)))))))).
+
+[?X3]([?Y3](((~eq(X3,Y3)->(set_(X3)|set_(Y3)))->ok))).
+
+[!X5]([?Y5](((set_(X5)&(set_(Y5)|edge(X5,Y5)))->ok))).
+
+
+{ok, color_, color, set, set_}
+<X@vtx;Y@vtx;X1@vtx;Y1@vtx;X2@vtx;Y2@vtx;X3@vtx;Y3@vtx;X4@vtx;Y4@vtx;X5@vtx;Y5@vtx;X6@vtx;Y6@vtx;X7@vtx;Y7@vtx>
+
+
+==>
+
+
+
+
+
+Answer: 1
+color(2) color(1) 
+Answer: 2
+color(3) color(1) 
+Answer: 3
+color(3) color(2) color(1) 
+Answer: 4
+color(4) color(2) color(1) 
+Answer: 5
+color(4) color(3) color(2) color(1) 
+Answer: 6
+color(4) color(2) 
+Answer: 7
+color(4) color(3) color(2) 
+Answer: 8
+color(4) color(3) color(1) 
+Answer: 9
+color(5) color(3) color(1) 
+Answer: 10
+color(5) color(1) 
+Answer: 11
+color(5) color(4) color(2) 
+Answer: 12
+color(5) color(2) 
+Answer: 13
+color(5) color(4) color(3) 
+Answer: 14
+color(5) color(3) 
+Answer: 15
+color(5) 
+Answer: 16
+color(5) color(4) 
+
+Models     : 16
+
+===========================================
+
+
+
+
+===========================================
+[!X1]([!X2]([!X4]([!Y4]([!X6]([!Y]([!X](((((((color(X1)|color_(X1))&(set(X2)|set_(X2)))&((((set(X4)&set(Y4))&~eq(X4,Y4))&~edge(X4,Y4))->ok))&(((set(X6)&set(Y))&(color(X6)&color_(Y)))->ok))&(ok->(set(X)&set_(X))))&~~ok)))))))).
+
+[!X5]([?X3]([?Y3]([?Y5]((((~eq(X3,Y3)->(set_(X3)|set_(Y3)))->ok)&((set_(X5)&(set_(Y5)|edge(X5,Y5)))->ok)))))).
+
+{ok, color_, color, set, set_}
+<X@vtx;Y@vtx;X1@vtx;Y1@vtx;X2@vtx;Y2@vtx;X3@vtx;Y3@vtx;X4@vtx;Y4@vtx;X5@vtx;Y5@vtx;X6@vtx;Y6@vtx;X7@vtx;Y7@vtx>
+
+==>
+Answer: 1
+color(2) color(1) 
+Answer: 2
+color(3) color(1) 
+Answer: 3
+color(3) color(2) color(1) 
+Answer: 4
+color(4) color(2) color(1) 
+Answer: 5
+color(4) color(3) color(2) color(1) 
+Answer: 6
+color(4) color(2) 
+Answer: 7
+color(4) color(3) color(2) 
+Answer: 8
+color(4) color(3) color(1) 
+Answer: 9
+color(5) color(3) color(1) 
+Answer: 10
+color(5) color(1) 
+Answer: 11
+color(5) color(4) color(2) 
+Answer: 12
+color(5) color(2) 
+Answer: 13
+color(5) color(4) color(3) 
+Answer: 14
+color(5) color(3) 
+Answer: 15
+color(5) 
+Answer: 16
+color(5) color(4) 
+
+Models     : 16
+
+===========================================
+
+
+
+
+===========================================
+[!X1]([!X2]([!X4]([!Y4]([!X6]([!Y]([!X]([!X5]([?X3]([?Y3]([?Y5]((((((((color(X1)|color_(X1))&(set(X2)|set_(X2)))&((((set(X4)&set(Y4))&~eq(X4,Y4))&~edge(X4,Y4))->ok))&(((set(X6)&set(Y))&(color(X6)&color_(Y)))->ok))&(ok->(set(X)&set_(X))))&~~ok)&(((~eq(X3,Y3)->(set_(X3)|set_(Y3)))->ok)&((set_(X5)&(set_(Y5)|edge(X5,Y5)))->ok))))))))))))))
+
+
+==>
+over time 
+
+============================================
+
+
+
+============================================
+
+[!X]([!Y](((((((color(X)|color_(X))&(set(X)|set_(X)))&((((set(X)&set(Y))&~eq(X,Y))&~edge(X,Y))->ok))&(((set(X)&set(Y))&(color(X)&color_(Y)))->ok))&(ok->(set(X)&set_(X))))&~~ok))).
+
+[!X]([?Y1]([?Y]([?Y2]((((~eq(Y1,Y)->(set_(Y1)|set_(Y)))->ok)&((set_(X)&(set_(Y2)|edge(X,Y2)))->ok)))))).
+
+{ok, color_, color, set, set_}
+<X@vtx;Y@vtx;X1@vtx;Y1@vtx;X2@vtx;Y2@vtx;X3@vtx;Y3@vtx;X4@vtx;Y4@vtx;X5@vtx;Y5@vtx;X6@vtx;Y6@vtx;X7@vtx;Y7@vtx>
+
+==>
+
+Answer: 1
+color(2) color(1) 
+Answer: 2
+color(3) color(1) 
+Answer: 3
+color(3) color(2) color(1) 
+Answer: 4
+color(4) color(2) color(1) 
+Answer: 5
+color(4) color(3) color(2) color(1) 
+Answer: 6
+color(4) color(2) 
+Answer: 7
+color(4) color(3) color(2) 
+Answer: 8
+color(4) color(3) color(1) 
+Answer: 9
+color(5) color(3) color(1) 
+Answer: 10
+color(5) color(1) 
+Answer: 11
+color(5) color(4) color(2) 
+Answer: 12
+color(5) color(2) 
+Answer: 13
+color(5) color(4) color(3) 
+Answer: 14
+color(5) color(3) 
+Answer: 15
+color(5) 
+Answer: 16
+color(5) color(4) 
+
+Models     : 16
+
+============================================
+
+
+
+
+============================================
+
+[!X]([!Y](((((((color(X)|color_(X))&(set(X)|set_(X)))&((((set(X)&set(Y))&~eq(X,Y))&~edge(X,Y))->ok))&(((set(X)&set(Y))&(color(X)&color_(Y)))->ok))&(ok->(set(X)&set_(X))))&~~ok))).
+
+[?Y]([?Y1]([!X]([?Y2]((((~eq(Y1,Y)->(set_(Y1)|set_(Y)))->ok)&((set_(X)&(set_(Y2)|edge(X,Y2)))->ok)))))).
+
+
+{ok, color_, color, set, set_}
+<X@vtx;Y@vtx;X1@vtx;Y1@vtx;X2@vtx;Y2@vtx;X3@vtx;Y3@vtx;X4@vtx;Y4@vtx;X5@vtx;Y5@vtx;X6@vtx;Y6@vtx;X7@vtx;Y7@vtx>
+
+
+==>
+
+error 
+
+Models     : 2
+=============================================
+
+
+============================================
+[! X](cvr(X)->idx(X)).
+[! X][! Y]( (set(X,Y) & idx(X) ) ->  ([? Z](set(Z,Y)) & cvr(Z))).
+
+{set,cvr,idx}
+<X@i;Y@e;Z@i>
+
+==>
+[!X]((cvr(X)->idx(X)))
+[!X]([!Y]([?Z](((set(X,Y)&idx(X))->(set(Z,Y)&cvr(Z))))))
+
+
+=============================================
+
+
+
+
+=============================================
+最小集合包含，表示有几个集合包含的元素，最少可以用其中几个进行包含
+=============================================

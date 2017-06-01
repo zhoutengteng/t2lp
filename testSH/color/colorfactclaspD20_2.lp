@@ -1,0 +1,53 @@
+#hide.
+#show color/1.
+vtx(1..20).
+min_vtx(1).
+max_vtx(20).
+edge(3,2). edge(2,3).
+edge(5,3). edge(3,5).
+edge(6,5). edge(5,6).
+edge(7,6). edge(6,7).
+edge(8,6). edge(6,8).
+edge(8,7). edge(7,8).
+edge(9,1). edge(1,9).
+edge(9,5). edge(5,9).
+edge(11,6). edge(6,11).
+edge(12,10). edge(10,12).
+edge(12,11). edge(11,12).
+edge(13,2). edge(2,13).
+edge(13,4). edge(4,13).
+edge(13,10). edge(10,13).
+edge(13,12). edge(12,13).
+edge(14,8). edge(8,14).
+edge(14,12). edge(12,14).
+edge(14,13). edge(13,14).
+edge(15,5). edge(5,15).
+edge(15,9). edge(9,15).
+edge(16,1). edge(1,16).
+edge(16,2). edge(2,16).
+edge(16,10). edge(10,16).
+edge(16,11). edge(11,16).
+edge(17,3). edge(3,17).
+edge(17,8). edge(8,17).
+edge(17,9). edge(9,17).
+edge(17,12). edge(12,17).
+edge(17,13). edge(13,17).
+edge(18,3). edge(3,18).
+edge(18,5). edge(5,18).
+edge(18,7). edge(7,18).
+edge(18,8). edge(8,18).
+edge(18,9). edge(9,18).
+edge(18,10). edge(10,18).
+edge(18,14). edge(14,18).
+edge(18,15). edge(15,18).
+edge(18,17). edge(17,18).
+edge(19,2). edge(2,19).
+edge(19,4). edge(4,19).
+edge(19,5). edge(5,19).
+edge(19,15). edge(15,19).
+edge(20,1). edge(1,20).
+edge(20,3). edge(3,20).
+edge(20,6). edge(6,20).
+edge(20,10). edge(10,20).
+edge(20,15). edge(15,20).
+edge(20,16). edge(16,20).

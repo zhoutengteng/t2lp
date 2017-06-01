@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/t2lp.dir/main.cpp.o  -o t2lp -rdynamic src/libCommon.a 

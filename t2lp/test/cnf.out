@@ -1,0 +1,664 @@
+%MIN and MAX domain
+#domain min_conj(MIN_conj).
+#domain max_conj(MAX_conj).
+#domain min_atom(MIN_atom).
+#domain max_atom(MAX_atom).
+
+%Variable domain
+#domain atom(Y).
+#domain conj(X).
+#domain conj(NV_0).
+#domain atom(NV_1).
+#domain atom(NV_2).
+#domain atom(NV_3).
+
+%Nega nega predicate define
+_true(Y):- not true(Y).
+_false(Y):- not false(Y).
+_s_0(X):- not s_0(X).
+_ok:- not ok.
+_t_1(X,NV_0,Y):- not t_1(X,NV_0,Y).
+_t_0(X):- not t_0(X).
+_t_2(X,NV_0,Y):- not t_2(X,NV_0,Y).
+_t_3(X,NV_0,Y):- not t_3(X,NV_0,Y).
+
+%Extension predicate define
+_posc(X,Y):- not posc(X,Y).
+_negc(X,Y):- not negc(X,Y).
+_un(Y):- not un(Y).
+_succ_conj(X,NV_0):- not succ_conj(X,NV_0).
+_max_conj(X):- not max_conj(X).
+_succ_atom(Y,NV_1):- not succ_atom(Y,NV_1).
+_max_atom(Y):- not max_atom(Y).
+
+%Succ predicate definition
+succ_conj(A1,A2):- A1==A2-1, conj(A1), conj(A2).
+succ_atom(A1,A2):- A1==A2-1, atom(A1), atom(A2).
+eq(X,Y) :- X = Y.
+
+true(Y) | false(Y).
+:- not s_0(MIN_conj).
+:- not s_1(X,NV_0,MIN_atom).
+s_1(X,NV_0,Y):- succ_atom(Y,NV_1), s_1(X,NV_0,NV_1).
+s_1(X,NV_0,Y):- not succ_conj(X,NV_0), not ok, not _true(Y), posc(X,Y).
+s_1(X,NV_0,Y):- not succ_conj(X,NV_0), not ok, not _false(Y), negc(X,Y).
+s_1(X,NV_0,Y):- not s_0(NV_0), not ok, not _true(Y), posc(X,Y).
+s_1(X,NV_0,Y):- not s_0(NV_0), not ok, not _false(Y), negc(X,Y).
+s_1(X,NV_0,Y):- not _s_0(X).
+s_1(X,NV_0,Y):- not ok, posc(X,Y), not _true(Y), not succ_conj(X,NV_0), not _s_0(X).
+s_1(X,NV_0,Y):- not ok, negc(X,Y), not _false(Y), not succ_conj(X,NV_0), not _s_0(X).
+s_1(X,NV_0,Y):- not ok, posc(X,Y), not _true(Y), not succ_conj(X,NV_0), not _s_0(X).
+s_1(X,NV_0,Y):- not ok, negc(X,Y), not _false(Y), not succ_conj(X,NV_0), not _s_0(X).
+s_1(X,NV_0,Y):- not ok, posc(X,Y), not s_0(NV_0), not _true(Y), not _s_0(X).
+s_1(X,NV_0,Y):- not ok, negc(X,Y), not s_0(NV_0), not _false(Y), not _s_0(X).
+s_1(X,NV_0,Y):- not ok, not s_0(NV_0), posc(X,Y), not _true(Y), not _s_0(X).
+s_1(X,NV_0,Y):- not ok, not s_0(NV_0), negc(X,Y), not _false(Y), not _s_0(X).
+s_0(X) | t_1(X,NV_0,MIN_atom):- succ_conj(X,NV_0), s_0(NV_0).
+s_0(X) | t_1(X,NV_0,MIN_atom):- not negc(X,MIN_atom), not posc(X,MIN_atom).
+s_0(X) | t_1(X,NV_0,MIN_atom):- not false(MIN_atom), not posc(X,MIN_atom).
+s_0(X) | t_1(X,NV_0,MIN_atom):- not negc(X,MIN_atom), not true(MIN_atom).
+s_0(X) | t_1(X,NV_0,MIN_atom):- not false(MIN_atom), not true(MIN_atom).
+s_0(X) | t_1(X,NV_0,MIN_atom):- not _ok.
+s_0(X) | t_1(X,NV_0,MIN_atom):- not negc(X,MIN_atom), not posc(X,MIN_atom), not _ok.
+s_0(X) | t_1(X,NV_0,MIN_atom):- not false(MIN_atom), not posc(X,MIN_atom), not _ok.
+s_0(X) | t_1(X,NV_0,MIN_atom):- not true(MIN_atom), not negc(X,MIN_atom), not _ok.
+s_0(X) | t_1(X,NV_0,MIN_atom):- not false(MIN_atom), not true(MIN_atom), not _ok.
+t_1(X,NV_0,MIN_atom):- not s_0(X), succ_conj(X,NV_0), not _s_0(NV_0).
+t_1(X,NV_0,MIN_atom):- not negc(X,MIN_atom), not posc(X,MIN_atom), not s_0(X).
+t_1(X,NV_0,MIN_atom):- not false(MIN_atom), not posc(X,MIN_atom), not s_0(X).
+t_1(X,NV_0,MIN_atom):- not negc(X,MIN_atom), not true(MIN_atom), not s_0(X).
+t_1(X,NV_0,MIN_atom):- not false(MIN_atom), not true(MIN_atom), not s_0(X).
+t_1(X,NV_0,MIN_atom):- not s_0(X), not _ok.
+s_0(X):- succ_conj(X,NV_0), s_0(NV_0), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y).
+s_0(X):- not negc(X,Y), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not posc(X,Y).
+s_0(X):- not false(Y), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not posc(X,Y).
+s_0(X):- not negc(X,Y), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not true(Y).
+s_0(X):- not false(Y), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not true(Y).
+s_0(X):- t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not _ok.
+s_0(X):- t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not negc(X,Y), not posc(X,Y), not _ok.
+s_0(X):- not false(Y), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not posc(X,Y), not _ok.
+s_0(X):- not true(Y), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not negc(X,Y), not _ok.
+s_0(X):- not false(Y), not true(Y), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not _ok.
+:- not s_0(X), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), succ_conj(X,NV_0), not _s_0(NV_0).
+:- not negc(X,Y), not posc(X,Y), not s_0(X), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y).
+:- not false(Y), not posc(X,Y), not s_0(X), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y).
+:- not negc(X,Y), not true(Y), not s_0(X), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y).
+:- not false(Y), not true(Y), not s_0(X), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y).
+:- not s_0(X), t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not _ok.
+:- not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not s_0(X), not _s_0(NV_0), succ_conj(X,NV_0), not _t_1(X,NV_0,MAX_atom).
+:- not negc(X,Y), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not s_0(X), not posc(X,Y), not _t_1(X,NV_0,MAX_atom).
+:- not false(Y), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not s_0(X), not posc(X,Y), not _t_1(X,NV_0,MAX_atom).
+:- not negc(X,Y), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not s_0(X), not true(Y), not _t_1(X,NV_0,MAX_atom).
+:- not false(Y), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not s_0(X), not true(Y), not _t_1(X,NV_0,MAX_atom).
+:- not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not s_0(X), not _ok, not _t_1(X,NV_0,MAX_atom).
+s_0(X):- succ_conj(X,NV_0), s_0(NV_0), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y).
+s_0(X):- not negc(X,Y), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), not posc(X,Y).
+s_0(X):- not false(Y), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), not posc(X,Y).
+s_0(X):- not negc(X,Y), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), not true(Y).
+s_0(X):- not false(Y), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), not true(Y).
+s_0(X):- t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), not _ok.
+s_0(X):- t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), not negc(X,Y), not posc(X,Y), not _ok.
+s_0(X):- not false(Y), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), not posc(X,Y), not _ok.
+s_0(X):- not true(Y), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), not negc(X,Y), not _ok.
+s_0(X):- not false(Y), not true(Y), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), not _ok.
+:- not s_0(X), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), succ_conj(X,NV_0), not _s_0(NV_0).
+:- not negc(X,Y), not posc(X,Y), not s_0(X), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y).
+:- not false(Y), not posc(X,Y), not s_0(X), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y).
+:- not negc(X,Y), not true(Y), not s_0(X), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y).
+:- not false(Y), not true(Y), not s_0(X), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y).
+:- not s_0(X), t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), not _ok.
+:- max_atom(Y), s_1(X,NV_0,Y), not s_0(X), not _s_0(NV_0), succ_conj(X,NV_0), not _t_1(X,NV_0,MAX_atom).
+:- not negc(X,Y), max_atom(Y), s_1(X,NV_0,Y), not s_0(X), not posc(X,Y), not _t_1(X,NV_0,MAX_atom).
+:- not false(Y), max_atom(Y), s_1(X,NV_0,Y), not s_0(X), not posc(X,Y), not _t_1(X,NV_0,MAX_atom).
+:- not negc(X,Y), max_atom(Y), s_1(X,NV_0,Y), not s_0(X), not true(Y), not _t_1(X,NV_0,MAX_atom).
+:- not false(Y), max_atom(Y), s_1(X,NV_0,Y), not s_0(X), not true(Y), not _t_1(X,NV_0,MAX_atom).
+:- max_atom(Y), s_1(X,NV_0,Y), not s_0(X), not _ok, not _t_1(X,NV_0,MAX_atom).
+t_1(X,NV_0,MAX_atom):- not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not succ_conj(X,NV_0), not ok, not _true(Y), posc(X,Y).
+t_1(X,NV_0,MAX_atom):- not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not succ_conj(X,NV_0), not ok, not _false(Y), negc(X,Y).
+t_1(X,NV_0,MAX_atom):- not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not s_0(NV_0), not ok, not _true(Y), posc(X,Y).
+t_1(X,NV_0,MAX_atom):- not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not s_0(NV_0), not ok, not _false(Y), negc(X,Y).
+t_1(X,NV_0,MAX_atom):- s_0(X), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y).
+t_1(X,NV_0,MAX_atom):- not ok, posc(X,Y), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not _true(Y), not succ_conj(X,NV_0), not _s_0(X).
+t_1(X,NV_0,MAX_atom):- not ok, negc(X,Y), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not _false(Y), not succ_conj(X,NV_0), not _s_0(X).
+t_1(X,NV_0,MAX_atom):- not ok, not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), posc(X,Y), not _true(Y), not succ_conj(X,NV_0), not _s_0(X).
+t_1(X,NV_0,MAX_atom):- not ok, not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), negc(X,Y), not _false(Y), not succ_conj(X,NV_0), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,MAX_atom):- not ok, posc(X,Y), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not _true(Y), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,MAX_atom):- not ok, negc(X,Y), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not _false(Y), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,MAX_atom):- not ok, not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), posc(X,Y), not _true(Y), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,MAX_atom):- not ok, not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), negc(X,Y), not _false(Y), not _s_0(X).
+:- not ok, not succ_conj(X,NV_0), not t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), posc(X,Y), not _true(Y).
+:- not ok, not succ_conj(X,NV_0), not t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), negc(X,Y), not _false(Y).
+:- not ok, not s_0(NV_0), not t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), posc(X,Y), not _true(Y).
+:- not ok, not s_0(NV_0), not t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), negc(X,Y), not _false(Y).
+:- not t_1(X,NV_0,MAX_atom), not s_1(X,NV_0,NV_1), succ_atom(Y,NV_1), s_1(X,NV_0,Y), not _s_0(X).
+t_1(X,NV_0,MAX_atom):- max_atom(Y), s_1(X,NV_0,Y), not succ_conj(X,NV_0), not ok, not _true(Y), posc(X,Y).
+t_1(X,NV_0,MAX_atom):- max_atom(Y), s_1(X,NV_0,Y), not succ_conj(X,NV_0), not ok, not _false(Y), negc(X,Y).
+t_1(X,NV_0,MAX_atom):- max_atom(Y), s_1(X,NV_0,Y), not s_0(NV_0), not ok, not _true(Y), posc(X,Y).
+t_1(X,NV_0,MAX_atom):- max_atom(Y), s_1(X,NV_0,Y), not s_0(NV_0), not ok, not _false(Y), negc(X,Y).
+t_1(X,NV_0,MAX_atom):- s_0(X), max_atom(Y), s_1(X,NV_0,Y).
+t_1(X,NV_0,MAX_atom):- not ok, posc(X,Y), max_atom(Y), s_1(X,NV_0,Y), not _true(Y), not succ_conj(X,NV_0), not _s_0(X).
+t_1(X,NV_0,MAX_atom):- not ok, negc(X,Y), max_atom(Y), s_1(X,NV_0,Y), not _false(Y), not succ_conj(X,NV_0), not _s_0(X).
+t_1(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_1(X,NV_0,Y), posc(X,Y), not _true(Y), not succ_conj(X,NV_0), not _s_0(X).
+t_1(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_1(X,NV_0,Y), negc(X,Y), not _false(Y), not succ_conj(X,NV_0), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,MAX_atom):- not ok, posc(X,Y), max_atom(Y), s_1(X,NV_0,Y), not _true(Y), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,MAX_atom):- not ok, negc(X,Y), max_atom(Y), s_1(X,NV_0,Y), not _false(Y), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_1(X,NV_0,Y), posc(X,Y), not _true(Y), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_1(X,NV_0,Y), negc(X,Y), not _false(Y), not _s_0(X).
+:- not ok, not succ_conj(X,NV_0), not t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), posc(X,Y), not _true(Y).
+:- not ok, not succ_conj(X,NV_0), not t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), negc(X,Y), not _false(Y).
+:- not ok, not s_0(NV_0), not t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), posc(X,Y), not _true(Y).
+:- not ok, not s_0(NV_0), not t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), negc(X,Y), not _false(Y).
+:- not t_1(X,NV_0,MAX_atom), max_atom(Y), s_1(X,NV_0,Y), not _s_0(X).
+s_0(X) | t_1(X,NV_0,NV_1):- succ_conj(X,NV_0), s_0(NV_0), t_1(X,NV_0,Y), succ_atom(Y,NV_1).
+s_0(X) | t_1(X,NV_0,NV_1):- not negc(X,NV_1), t_1(X,NV_0,Y), succ_atom(Y,NV_1), not posc(X,NV_1).
+s_0(X) | t_1(X,NV_0,NV_1):- not false(NV_1), t_1(X,NV_0,Y), succ_atom(Y,NV_1), not posc(X,NV_1).
+s_0(X) | t_1(X,NV_0,NV_1):- not negc(X,NV_1), t_1(X,NV_0,Y), succ_atom(Y,NV_1), not true(NV_1).
+s_0(X) | t_1(X,NV_0,NV_1):- not false(NV_1), t_1(X,NV_0,Y), succ_atom(Y,NV_1), not true(NV_1).
+s_0(X) | t_1(X,NV_0,NV_1):- t_1(X,NV_0,Y), succ_atom(Y,NV_1), not _ok.
+s_0(X) | t_1(X,NV_0,NV_1):- t_1(X,NV_0,Y), succ_atom(Y,NV_1), not negc(X,NV_1), not posc(X,NV_1), not _ok.
+s_0(X) | t_1(X,NV_0,NV_1):- not false(NV_1), t_1(X,NV_0,Y), succ_atom(Y,NV_1), not posc(X,NV_1), not _ok.
+s_0(X) | t_1(X,NV_0,NV_1):- not true(NV_1), t_1(X,NV_0,Y), succ_atom(Y,NV_1), not negc(X,NV_1), not _ok.
+s_0(X) | t_1(X,NV_0,NV_1):- not false(NV_1), not true(NV_1), t_1(X,NV_0,Y), succ_atom(Y,NV_1), not _ok.
+t_1(X,NV_0,NV_1):- not s_0(X), t_1(X,NV_0,Y), succ_atom(Y,NV_1), succ_conj(X,NV_0), not _s_0(NV_0).
+t_1(X,NV_0,NV_1):- not negc(X,NV_1), not posc(X,NV_1), not s_0(X), t_1(X,NV_0,Y), succ_atom(Y,NV_1).
+t_1(X,NV_0,NV_1):- not false(NV_1), not posc(X,NV_1), not s_0(X), t_1(X,NV_0,Y), succ_atom(Y,NV_1).
+t_1(X,NV_0,NV_1):- not negc(X,NV_1), not true(NV_1), not s_0(X), t_1(X,NV_0,Y), succ_atom(Y,NV_1).
+t_1(X,NV_0,NV_1):- not false(NV_1), not true(NV_1), not s_0(X), t_1(X,NV_0,Y), succ_atom(Y,NV_1).
+t_1(X,NV_0,NV_1):- not s_0(X), t_1(X,NV_0,Y), succ_atom(Y,NV_1), not _ok.
+:- succ_atom(Y,NV_1), not s_0(X), not t_1(X,NV_0,NV_1), not _s_0(NV_0), succ_conj(X,NV_0), not _t_1(X,NV_0,Y).
+:- not negc(X,NV_1), succ_atom(Y,NV_1), not s_0(X), not t_1(X,NV_0,NV_1), not posc(X,NV_1), not _t_1(X,NV_0,Y).
+:- not false(NV_1), succ_atom(Y,NV_1), not s_0(X), not t_1(X,NV_0,NV_1), not posc(X,NV_1), not _t_1(X,NV_0,Y).
+:- not negc(X,NV_1), succ_atom(Y,NV_1), not s_0(X), not t_1(X,NV_0,NV_1), not true(NV_1), not _t_1(X,NV_0,Y).
+:- not false(NV_1), succ_atom(Y,NV_1), not s_0(X), not t_1(X,NV_0,NV_1), not true(NV_1), not _t_1(X,NV_0,Y).
+:- succ_atom(Y,NV_1), not s_0(X), not t_1(X,NV_0,NV_1), not _ok, not _t_1(X,NV_0,Y).
+t_1(X,NV_0,Y):- succ_atom(Y,NV_1), not succ_conj(X,NV_0), not ok, not _true(NV_1), posc(X,NV_1).
+t_1(X,NV_0,Y):- succ_atom(Y,NV_1), not succ_conj(X,NV_0), not ok, not _false(NV_1), negc(X,NV_1).
+t_1(X,NV_0,Y):- succ_atom(Y,NV_1), not s_0(NV_0), not ok, not _true(NV_1), posc(X,NV_1).
+t_1(X,NV_0,Y):- succ_atom(Y,NV_1), not s_0(NV_0), not ok, not _false(NV_1), negc(X,NV_1).
+t_1(X,NV_0,Y):- s_0(X), succ_atom(Y,NV_1).
+t_1(X,NV_0,Y):- not ok, posc(X,NV_1), succ_atom(Y,NV_1), not _true(NV_1), not succ_conj(X,NV_0), not _s_0(X).
+t_1(X,NV_0,Y):- not ok, negc(X,NV_1), succ_atom(Y,NV_1), not _false(NV_1), not succ_conj(X,NV_0), not _s_0(X).
+t_1(X,NV_0,Y):- not ok, succ_atom(Y,NV_1), posc(X,NV_1), not _true(NV_1), not succ_conj(X,NV_0), not _s_0(X).
+t_1(X,NV_0,Y):- not ok, succ_atom(Y,NV_1), negc(X,NV_1), not _false(NV_1), not succ_conj(X,NV_0), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,Y):- not ok, posc(X,NV_1), succ_atom(Y,NV_1), not _true(NV_1), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,Y):- not ok, negc(X,NV_1), succ_atom(Y,NV_1), not _false(NV_1), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,Y):- not ok, succ_atom(Y,NV_1), posc(X,NV_1), not _true(NV_1), not _s_0(X).
+s_0(NV_0) | t_1(X,NV_0,Y):- not ok, succ_atom(Y,NV_1), negc(X,NV_1), not _false(NV_1), not _s_0(X).
+t_1(X,NV_0,Y):- t_1(X,NV_0,NV_1), succ_atom(Y,NV_1).
+:- not ok, not succ_conj(X,NV_0), not t_1(X,NV_0,Y), succ_atom(Y,NV_1), posc(X,NV_1), not _true(NV_1).
+:- not ok, not succ_conj(X,NV_0), not t_1(X,NV_0,Y), succ_atom(Y,NV_1), negc(X,NV_1), not _false(NV_1).
+:- not ok, not s_0(NV_0), not t_1(X,NV_0,Y), succ_atom(Y,NV_1), posc(X,NV_1), not _true(NV_1).
+:- not ok, not s_0(NV_0), not t_1(X,NV_0,Y), succ_atom(Y,NV_1), negc(X,NV_1), not _false(NV_1).
+:- not t_1(X,NV_0,Y), succ_atom(Y,NV_1), not _s_0(X).
+:- not t_1(X,NV_0,Y), succ_atom(Y,NV_1), not _t_1(X,NV_0,NV_1).
+ok | t_0(MIN_conj):- posc(MIN_conj,Y), true(Y).
+ok | t_0(MIN_conj):- negc(MIN_conj,Y), false(Y).
+t_0(MIN_conj):- not ok, posc(MIN_conj,Y), not _true(Y).
+t_0(MIN_conj):- not ok, negc(MIN_conj,Y), not _false(Y).
+ok:- posc(X,Y), true(Y), t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X).
+ok:- negc(X,Y), false(Y), t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X).
+:- not ok, t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), posc(X,Y), not _true(Y).
+:- not ok, t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), negc(X,Y), not _false(Y).
+:- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), not ok, not _true(Y), posc(X,Y), not _t_0(MAX_conj).
+:- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), not ok, not _false(Y), negc(X,Y), not _t_0(MAX_conj).
+ok:- posc(X,Y), true(Y), t_0(MAX_conj), max_conj(X), s_0(X).
+ok:- negc(X,Y), false(Y), t_0(MAX_conj), max_conj(X), s_0(X).
+:- not ok, t_0(MAX_conj), max_conj(X), s_0(X), posc(X,Y), not _true(Y).
+:- not ok, t_0(MAX_conj), max_conj(X), s_0(X), negc(X,Y), not _false(Y).
+:- max_conj(X), s_0(X), not ok, not _true(Y), posc(X,Y), not _t_0(MAX_conj).
+:- max_conj(X), s_0(X), not ok, not _false(Y), negc(X,Y), not _t_0(MAX_conj).
+:- not s_2(X,NV_0,MIN_atom).
+s_2(X,NV_0,Y):- succ_atom(Y,NV_2), s_2(X,NV_0,NV_2).
+s_2(X,NV_0,Y):- not s_0(X).
+s_2(X,NV_0,Y):- not max_conj(X), not _s_0(NV_0).
+s_2(X,NV_0,Y):- not succ_conj(X,NV_0), not max_conj(X).
+s_2(X,NV_0,Y):- not ok, not _true(Y), posc(X,Y).
+s_2(X,NV_0,Y):- not ok, not _false(Y), negc(X,Y).
+s_2(X,NV_0,Y):- not _t_0(MAX_conj).
+s_2(X,NV_0,Y):- not ok, posc(X,Y), not _true(Y), not _t_0(MAX_conj).
+s_2(X,NV_0,Y):- not ok, negc(X,Y), not _false(Y), not _t_0(MAX_conj).
+s_2(X,NV_0,Y):- not ok, posc(X,Y), not _true(Y), not _t_0(MAX_conj).
+s_2(X,NV_0,Y):- not ok, negc(X,Y), not _false(Y), not _t_0(MAX_conj).
+s_2(X,NV_0,Y):- not ok, not s_0(X), posc(X,Y), not _true(Y).
+s_2(X,NV_0,Y):- not ok, not s_0(X), negc(X,Y), not _false(Y).
+s_2(X,NV_0,Y):- not s_0(X), not _t_0(MAX_conj).
+s_2(X,NV_0,Y):- not ok, not _s_0(NV_0), not max_conj(X), posc(X,Y), not _true(Y).
+s_2(X,NV_0,Y):- not ok, not _s_0(NV_0), not max_conj(X), negc(X,Y), not _false(Y).
+s_2(X,NV_0,Y):- not _t_0(MAX_conj), not _s_0(NV_0), not max_conj(X).
+s_2(X,NV_0,Y):- not ok, not succ_conj(X,NV_0), not max_conj(X), posc(X,Y), not _true(Y).
+s_2(X,NV_0,Y):- not ok, not succ_conj(X,NV_0), not max_conj(X), negc(X,Y), not _false(Y).
+s_2(X,NV_0,Y):- not _t_0(MAX_conj), not succ_conj(X,NV_0), not max_conj(X).
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- not negc(X,MIN_atom), s_0(X), not s_0(NV_0), succ_conj(X,NV_0), not posc(X,MIN_atom).
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- not false(MIN_atom), s_0(X), not s_0(NV_0), succ_conj(X,NV_0), not posc(X,MIN_atom).
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- not negc(X,MIN_atom), s_0(X), not s_0(NV_0), succ_conj(X,NV_0), not true(MIN_atom).
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- not false(MIN_atom), s_0(X), not s_0(NV_0), succ_conj(X,NV_0), not true(MIN_atom).
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- ok, s_0(X), not s_0(NV_0), succ_conj(X,NV_0).
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- s_0(X), not s_0(NV_0), succ_conj(X,NV_0), not negc(X,MIN_atom), not posc(X,MIN_atom), not _ok.
+false(MIN_atom) | t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- s_0(X), not s_0(NV_0), succ_conj(X,NV_0), not posc(X,MIN_atom), not _ok.
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom) | true(MIN_atom):- s_0(X), not s_0(NV_0), succ_conj(X,NV_0), not negc(X,MIN_atom), not _ok.
+false(MIN_atom) | t_0(MAX_conj) | t_2(X,NV_0,MIN_atom) | true(MIN_atom):- s_0(X), not s_0(NV_0), succ_conj(X,NV_0), not _ok.
+t_2(X,NV_0,MIN_atom):- not negc(X,MIN_atom), not posc(X,MIN_atom), not t_0(MAX_conj), s_0(X), not s_0(NV_0), succ_conj(X,NV_0).
+t_2(X,NV_0,MIN_atom):- not false(MIN_atom), not posc(X,MIN_atom), not t_0(MAX_conj), s_0(X), not s_0(NV_0), succ_conj(X,NV_0).
+t_2(X,NV_0,MIN_atom):- not negc(X,MIN_atom), not true(MIN_atom), not t_0(MAX_conj), s_0(X), not s_0(NV_0), succ_conj(X,NV_0).
+t_2(X,NV_0,MIN_atom):- not false(MIN_atom), not true(MIN_atom), not t_0(MAX_conj), s_0(X), not s_0(NV_0), succ_conj(X,NV_0).
+t_2(X,NV_0,MIN_atom):- not t_0(MAX_conj), s_0(X), not s_0(NV_0), succ_conj(X,NV_0), not _ok.
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- not negc(X,MIN_atom), s_0(X), max_conj(X), not posc(X,MIN_atom).
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- not false(MIN_atom), s_0(X), max_conj(X), not posc(X,MIN_atom).
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- not negc(X,MIN_atom), s_0(X), max_conj(X), not true(MIN_atom).
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- not false(MIN_atom), s_0(X), max_conj(X), not true(MIN_atom).
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- ok, s_0(X), max_conj(X).
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- s_0(X), max_conj(X), not negc(X,MIN_atom), not posc(X,MIN_atom), not _ok.
+false(MIN_atom) | t_0(MAX_conj) | t_2(X,NV_0,MIN_atom):- s_0(X), max_conj(X), not posc(X,MIN_atom), not _ok.
+t_0(MAX_conj) | t_2(X,NV_0,MIN_atom) | true(MIN_atom):- s_0(X), max_conj(X), not negc(X,MIN_atom), not _ok.
+false(MIN_atom) | t_0(MAX_conj) | t_2(X,NV_0,MIN_atom) | true(MIN_atom):- s_0(X), max_conj(X), not _ok.
+t_2(X,NV_0,MIN_atom):- not negc(X,MIN_atom), not posc(X,MIN_atom), not t_0(MAX_conj), s_0(X), max_conj(X).
+t_2(X,NV_0,MIN_atom):- not false(MIN_atom), not posc(X,MIN_atom), not t_0(MAX_conj), s_0(X), max_conj(X).
+t_2(X,NV_0,MIN_atom):- not negc(X,MIN_atom), not true(MIN_atom), not t_0(MAX_conj), s_0(X), max_conj(X).
+t_2(X,NV_0,MIN_atom):- not false(MIN_atom), not true(MIN_atom), not t_0(MAX_conj), s_0(X), max_conj(X).
+t_2(X,NV_0,MIN_atom):- not t_0(MAX_conj), s_0(X), max_conj(X), not _ok.
+t_2(X,NV_0,MIN_atom):- not s_0(NV_0), not negc(X,MIN_atom), not posc(X,MIN_atom), not t_0(MAX_conj), not _s_0(X), succ_conj(X,NV_0).
+t_2(X,NV_0,MIN_atom):- not negc(X,MIN_atom), not posc(X,MIN_atom), not t_0(MAX_conj), max_conj(X), not _s_0(X).
+t_2(X,NV_0,MIN_atom):- not s_0(NV_0), not false(MIN_atom), not posc(X,MIN_atom), not t_0(MAX_conj), not _s_0(X), succ_conj(X,NV_0).
+t_2(X,NV_0,MIN_atom):- not false(MIN_atom), not posc(X,MIN_atom), not t_0(MAX_conj), max_conj(X), not _s_0(X).
+t_2(X,NV_0,MIN_atom):- not s_0(NV_0), not negc(X,MIN_atom), not true(MIN_atom), not t_0(MAX_conj), not _s_0(X), succ_conj(X,NV_0).
+t_2(X,NV_0,MIN_atom):- not negc(X,MIN_atom), not true(MIN_atom), not t_0(MAX_conj), max_conj(X), not _s_0(X).
+t_2(X,NV_0,MIN_atom):- not s_0(NV_0), not false(MIN_atom), not true(MIN_atom), not t_0(MAX_conj), not _s_0(X), succ_conj(X,NV_0).
+t_2(X,NV_0,MIN_atom):- not false(MIN_atom), not true(MIN_atom), not t_0(MAX_conj), max_conj(X), not _s_0(X).
+t_2(X,NV_0,MIN_atom):- not s_0(NV_0), not t_0(MAX_conj), not _ok, not _s_0(X), succ_conj(X,NV_0).
+t_2(X,NV_0,MIN_atom):- not t_0(MAX_conj), max_conj(X), not _ok, not _s_0(X).
+t_0(MAX_conj):- not negc(X,Y), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not posc(X,Y).
+t_0(MAX_conj):- not false(Y), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not posc(X,Y).
+t_0(MAX_conj):- not negc(X,Y), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not true(Y).
+t_0(MAX_conj):- not false(Y), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not true(Y).
+t_0(MAX_conj):- ok, not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+t_0(MAX_conj):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not negc(X,Y), not posc(X,Y), not _ok.
+false(Y) | t_0(MAX_conj):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not posc(X,Y), not _ok.
+true(Y) | t_0(MAX_conj):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not negc(X,Y), not _ok.
+false(Y) | true(Y) | t_0(MAX_conj):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _ok.
+:- not negc(X,Y), not posc(X,Y), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+:- not false(Y), not posc(X,Y), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+:- not negc(X,Y), not true(Y), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+:- not false(Y), not true(Y), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+:- not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _ok.
+t_0(MAX_conj):- not negc(X,Y), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not posc(X,Y).
+t_0(MAX_conj):- not false(Y), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not posc(X,Y).
+t_0(MAX_conj):- not negc(X,Y), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not true(Y).
+t_0(MAX_conj):- not false(Y), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not true(Y).
+t_0(MAX_conj):- ok, max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+t_0(MAX_conj):- max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not negc(X,Y), not posc(X,Y), not _ok.
+false(Y) | t_0(MAX_conj):- max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not posc(X,Y), not _ok.
+true(Y) | t_0(MAX_conj):- max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not negc(X,Y), not _ok.
+false(Y) | true(Y) | t_0(MAX_conj):- max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _ok.
+:- not negc(X,Y), not posc(X,Y), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+:- not false(Y), not posc(X,Y), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+:- not negc(X,Y), not true(Y), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+:- not false(Y), not true(Y), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+:- not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _ok.
+:- not s_0(NV_0), not negc(X,Y), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), not _s_0(X), succ_conj(X,NV_0).
+:- not negc(X,Y), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), not _s_0(X), max_conj(X).
+:- not s_0(NV_0), not false(Y), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), not _s_0(X), succ_conj(X,NV_0).
+:- not false(Y), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), not _s_0(X), max_conj(X).
+:- not s_0(NV_0), not negc(X,Y), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), not _s_0(X), succ_conj(X,NV_0).
+:- not negc(X,Y), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), not _s_0(X), max_conj(X).
+:- not s_0(NV_0), not false(Y), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), not _s_0(X), succ_conj(X,NV_0).
+:- not false(Y), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), not _s_0(X), max_conj(X).
+:- not s_0(NV_0), t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not _ok, not _s_0(X), succ_conj(X,NV_0).
+:- t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not _ok, not _s_0(X), max_conj(X).
+:- not negc(X,Y), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not s_0(NV_0), not t_0(MAX_conj), not posc(X,Y), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not false(Y), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not s_0(NV_0), not t_0(MAX_conj), not posc(X,Y), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not negc(X,Y), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not s_0(NV_0), not t_0(MAX_conj), not true(Y), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not false(Y), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not s_0(NV_0), not t_0(MAX_conj), not true(Y), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not s_0(NV_0), not t_0(MAX_conj), not _ok, succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not negc(X,Y), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), max_conj(X), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not false(Y), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), max_conj(X), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not negc(X,Y), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), max_conj(X), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not false(Y), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), max_conj(X), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not t_0(MAX_conj), not _ok, max_conj(X), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+t_0(MAX_conj):- not negc(X,Y), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not posc(X,Y).
+t_0(MAX_conj):- not false(Y), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not posc(X,Y).
+t_0(MAX_conj):- not negc(X,Y), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not true(Y).
+t_0(MAX_conj):- not false(Y), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not true(Y).
+t_0(MAX_conj):- ok, not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+t_0(MAX_conj):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not negc(X,Y), not posc(X,Y), not _ok.
+false(Y) | t_0(MAX_conj):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not posc(X,Y), not _ok.
+true(Y) | t_0(MAX_conj):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not negc(X,Y), not _ok.
+false(Y) | true(Y) | t_0(MAX_conj):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not _ok.
+:- not negc(X,Y), not posc(X,Y), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+:- not false(Y), not posc(X,Y), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+:- not negc(X,Y), not true(Y), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+:- not false(Y), not true(Y), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+:- not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not _ok.
+t_0(MAX_conj):- not negc(X,Y), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not posc(X,Y).
+t_0(MAX_conj):- not false(Y), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not posc(X,Y).
+t_0(MAX_conj):- not negc(X,Y), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not true(Y).
+t_0(MAX_conj):- not false(Y), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not true(Y).
+t_0(MAX_conj):- ok, max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+t_0(MAX_conj):- max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not negc(X,Y), not posc(X,Y), not _ok.
+false(Y) | t_0(MAX_conj):- max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not posc(X,Y), not _ok.
+true(Y) | t_0(MAX_conj):- max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not negc(X,Y), not _ok.
+false(Y) | true(Y) | t_0(MAX_conj):- max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not _ok.
+:- not negc(X,Y), not posc(X,Y), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+:- not false(Y), not posc(X,Y), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+:- not negc(X,Y), not true(Y), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+:- not false(Y), not true(Y), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+:- not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not _ok.
+:- not s_0(NV_0), not negc(X,Y), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), not _s_0(X), succ_conj(X,NV_0).
+:- not negc(X,Y), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), not _s_0(X), max_conj(X).
+:- not s_0(NV_0), not false(Y), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), not _s_0(X), succ_conj(X,NV_0).
+:- not false(Y), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), not _s_0(X), max_conj(X).
+:- not s_0(NV_0), not negc(X,Y), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), not _s_0(X), succ_conj(X,NV_0).
+:- not negc(X,Y), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), not _s_0(X), max_conj(X).
+:- not s_0(NV_0), not false(Y), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), not _s_0(X), succ_conj(X,NV_0).
+:- not false(Y), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), not _s_0(X), max_conj(X).
+:- not s_0(NV_0), t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not _ok, not _s_0(X), succ_conj(X,NV_0).
+:- t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not _ok, not _s_0(X), max_conj(X).
+:- not negc(X,Y), max_atom(Y), s_2(X,NV_0,Y), not s_0(NV_0), not t_0(MAX_conj), not posc(X,Y), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not false(Y), max_atom(Y), s_2(X,NV_0,Y), not s_0(NV_0), not t_0(MAX_conj), not posc(X,Y), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not negc(X,Y), max_atom(Y), s_2(X,NV_0,Y), not s_0(NV_0), not t_0(MAX_conj), not true(Y), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not false(Y), max_atom(Y), s_2(X,NV_0,Y), not s_0(NV_0), not t_0(MAX_conj), not true(Y), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- max_atom(Y), s_2(X,NV_0,Y), not s_0(NV_0), not t_0(MAX_conj), not _ok, succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not negc(X,Y), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), max_conj(X), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not false(Y), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not posc(X,Y), max_conj(X), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not negc(X,Y), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), max_conj(X), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- not false(Y), max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not true(Y), max_conj(X), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+:- max_atom(Y), s_2(X,NV_0,Y), not t_0(MAX_conj), not _ok, max_conj(X), not _s_0(X), not _t_2(X,NV_0,MAX_atom).
+t_2(X,NV_0,MAX_atom):- not s_0(X), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+t_2(X,NV_0,MAX_atom):- not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not max_conj(X), not _s_0(NV_0).
+t_2(X,NV_0,MAX_atom):- not succ_conj(X,NV_0), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not max_conj(X).
+t_2(X,NV_0,MAX_atom):- not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not ok, not _true(Y), posc(X,Y).
+t_2(X,NV_0,MAX_atom):- not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not ok, not _false(Y), negc(X,Y).
+t_2(X,NV_0,MAX_atom):- t_0(MAX_conj), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+ok | t_2(X,NV_0,MAX_atom):- posc(X,Y), true(Y), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _t_0(MAX_conj).
+ok | t_2(X,NV_0,MAX_atom):- negc(X,Y), false(Y), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _t_0(MAX_conj).
+t_2(X,NV_0,MAX_atom):- not ok, not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), posc(X,Y), not _true(Y), not _t_0(MAX_conj).
+t_2(X,NV_0,MAX_atom):- not ok, not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), negc(X,Y), not _false(Y), not _t_0(MAX_conj).
+s_0(X) | t_2(X,NV_0,MAX_atom):- not ok, not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), posc(X,Y), not _true(Y).
+s_0(X) | t_2(X,NV_0,MAX_atom):- not ok, not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), negc(X,Y), not _false(Y).
+s_0(X) | t_2(X,NV_0,MAX_atom):- not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _t_0(MAX_conj).
+t_2(X,NV_0,MAX_atom):- not ok, not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _s_0(NV_0), not max_conj(X), posc(X,Y), not _true(Y).
+t_2(X,NV_0,MAX_atom):- not ok, not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _s_0(NV_0), not max_conj(X), negc(X,Y), not _false(Y).
+t_2(X,NV_0,MAX_atom):- not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _t_0(MAX_conj), not _s_0(NV_0), not max_conj(X).
+t_2(X,NV_0,MAX_atom):- not ok, not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not succ_conj(X,NV_0), not max_conj(X), posc(X,Y), not _true(Y).
+t_2(X,NV_0,MAX_atom):- not ok, not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not succ_conj(X,NV_0), not max_conj(X), negc(X,Y), not _false(Y).
+t_2(X,NV_0,MAX_atom):- not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _t_0(MAX_conj), not succ_conj(X,NV_0), not max_conj(X).
+:- not s_0(X), not t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+:- not max_conj(X), not t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _s_0(NV_0).
+:- not max_conj(X), not succ_conj(X,NV_0), not t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y).
+:- not ok, not t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), posc(X,Y), not _true(Y).
+:- not ok, not t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), negc(X,Y), not _false(Y).
+:- not t_2(X,NV_0,MAX_atom), not s_2(X,NV_0,NV_2), succ_atom(Y,NV_2), s_2(X,NV_0,Y), not _t_0(MAX_conj).
+t_2(X,NV_0,MAX_atom):- not s_0(X), max_atom(Y), s_2(X,NV_0,Y).
+t_2(X,NV_0,MAX_atom):- max_atom(Y), s_2(X,NV_0,Y), not max_conj(X), not _s_0(NV_0).
+t_2(X,NV_0,MAX_atom):- not succ_conj(X,NV_0), max_atom(Y), s_2(X,NV_0,Y), not max_conj(X).
+t_2(X,NV_0,MAX_atom):- max_atom(Y), s_2(X,NV_0,Y), not ok, not _true(Y), posc(X,Y).
+t_2(X,NV_0,MAX_atom):- max_atom(Y), s_2(X,NV_0,Y), not ok, not _false(Y), negc(X,Y).
+t_2(X,NV_0,MAX_atom):- t_0(MAX_conj), max_atom(Y), s_2(X,NV_0,Y).
+ok | t_2(X,NV_0,MAX_atom):- posc(X,Y), true(Y), max_atom(Y), s_2(X,NV_0,Y), not _t_0(MAX_conj).
+ok | t_2(X,NV_0,MAX_atom):- negc(X,Y), false(Y), max_atom(Y), s_2(X,NV_0,Y), not _t_0(MAX_conj).
+t_2(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_2(X,NV_0,Y), posc(X,Y), not _true(Y), not _t_0(MAX_conj).
+t_2(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_2(X,NV_0,Y), negc(X,Y), not _false(Y), not _t_0(MAX_conj).
+s_0(X) | t_2(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_2(X,NV_0,Y), posc(X,Y), not _true(Y).
+s_0(X) | t_2(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_2(X,NV_0,Y), negc(X,Y), not _false(Y).
+s_0(X) | t_2(X,NV_0,MAX_atom):- max_atom(Y), s_2(X,NV_0,Y), not _t_0(MAX_conj).
+t_2(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_2(X,NV_0,Y), not _s_0(NV_0), not max_conj(X), posc(X,Y), not _true(Y).
+t_2(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_2(X,NV_0,Y), not _s_0(NV_0), not max_conj(X), negc(X,Y), not _false(Y).
+t_2(X,NV_0,MAX_atom):- max_atom(Y), s_2(X,NV_0,Y), not _t_0(MAX_conj), not _s_0(NV_0), not max_conj(X).
+t_2(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_2(X,NV_0,Y), not succ_conj(X,NV_0), not max_conj(X), posc(X,Y), not _true(Y).
+t_2(X,NV_0,MAX_atom):- not ok, max_atom(Y), s_2(X,NV_0,Y), not succ_conj(X,NV_0), not max_conj(X), negc(X,Y), not _false(Y).
+t_2(X,NV_0,MAX_atom):- max_atom(Y), s_2(X,NV_0,Y), not _t_0(MAX_conj), not succ_conj(X,NV_0), not max_conj(X).
+:- not s_0(X), not t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+:- not max_conj(X), not t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not _s_0(NV_0).
+:- not max_conj(X), not succ_conj(X,NV_0), not t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y).
+:- not ok, not t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), posc(X,Y), not _true(Y).
+:- not ok, not t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), negc(X,Y), not _false(Y).
+:- not t_2(X,NV_0,MAX_atom), max_atom(Y), s_2(X,NV_0,Y), not _t_0(MAX_conj).
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not negc(X,NV_2), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not posc(X,NV_2).
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not false(NV_2), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not posc(X,NV_2).
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not negc(X,NV_2), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not true(NV_2).
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not false(NV_2), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not true(NV_2).
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- ok, not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not negc(X,NV_2), not posc(X,NV_2), not _ok.
+false(NV_2) | t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not posc(X,NV_2), not _ok.
+true(NV_2) | t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not negc(X,NV_2), not _ok.
+false(NV_2) | true(NV_2) | t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not _ok.
+t_2(X,NV_0,NV_2):- not negc(X,NV_2), not posc(X,NV_2), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+t_2(X,NV_0,NV_2):- not false(NV_2), not posc(X,NV_2), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+t_2(X,NV_0,NV_2):- not negc(X,NV_2), not true(NV_2), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+t_2(X,NV_0,NV_2):- not false(NV_2), not true(NV_2), not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+t_2(X,NV_0,NV_2):- not t_0(MAX_conj), not s_0(NV_0), succ_conj(X,NV_0), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not _ok.
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not negc(X,NV_2), max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not posc(X,NV_2).
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not false(NV_2), max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not posc(X,NV_2).
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not negc(X,NV_2), max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not true(NV_2).
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- not false(NV_2), max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not true(NV_2).
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- ok, max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+t_0(MAX_conj) | t_2(X,NV_0,NV_2):- max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not negc(X,NV_2), not posc(X,NV_2), not _ok.
+false(NV_2) | t_0(MAX_conj) | t_2(X,NV_0,NV_2):- max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not posc(X,NV_2), not _ok.
+true(NV_2) | t_0(MAX_conj) | t_2(X,NV_0,NV_2):- max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not negc(X,NV_2), not _ok.
+false(NV_2) | true(NV_2) | t_0(MAX_conj) | t_2(X,NV_0,NV_2):- max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not _ok.
+t_2(X,NV_0,NV_2):- not negc(X,NV_2), not posc(X,NV_2), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+t_2(X,NV_0,NV_2):- not false(NV_2), not posc(X,NV_2), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+t_2(X,NV_0,NV_2):- not negc(X,NV_2), not true(NV_2), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+t_2(X,NV_0,NV_2):- not false(NV_2), not true(NV_2), not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+t_2(X,NV_0,NV_2):- not t_0(MAX_conj), max_conj(X), s_0(X), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not _ok.
+t_2(X,NV_0,NV_2):- not s_0(NV_0), not negc(X,NV_2), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not t_0(MAX_conj), not posc(X,NV_2), not _s_0(X), succ_conj(X,NV_0).
+t_2(X,NV_0,NV_2):- not negc(X,NV_2), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not t_0(MAX_conj), not posc(X,NV_2), not _s_0(X), max_conj(X).
+t_2(X,NV_0,NV_2):- not s_0(NV_0), not false(NV_2), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not t_0(MAX_conj), not posc(X,NV_2), not _s_0(X), succ_conj(X,NV_0).
+t_2(X,NV_0,NV_2):- not false(NV_2), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not t_0(MAX_conj), not posc(X,NV_2), not _s_0(X), max_conj(X).
+t_2(X,NV_0,NV_2):- not s_0(NV_0), not negc(X,NV_2), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not t_0(MAX_conj), not true(NV_2), not _s_0(X), succ_conj(X,NV_0).
+t_2(X,NV_0,NV_2):- not negc(X,NV_2), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not t_0(MAX_conj), not true(NV_2), not _s_0(X), max_conj(X).
+t_2(X,NV_0,NV_2):- not s_0(NV_0), not false(NV_2), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not t_0(MAX_conj), not true(NV_2), not _s_0(X), succ_conj(X,NV_0).
+t_2(X,NV_0,NV_2):- not false(NV_2), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not t_0(MAX_conj), not true(NV_2), not _s_0(X), max_conj(X).
+t_2(X,NV_0,NV_2):- not s_0(NV_0), t_2(X,NV_0,Y), succ_atom(Y,NV_2), not t_0(MAX_conj), not _ok, not _s_0(X), succ_conj(X,NV_0).
+t_2(X,NV_0,NV_2):- t_2(X,NV_0,Y), succ_atom(Y,NV_2), not t_0(MAX_conj), not _ok, not _s_0(X), max_conj(X).
+:- not negc(X,NV_2), succ_atom(Y,NV_2), not t_2(X,NV_0,NV_2), not s_0(NV_0), not t_0(MAX_conj), not posc(X,NV_2), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,Y).
+:- not false(NV_2), succ_atom(Y,NV_2), not t_2(X,NV_0,NV_2), not s_0(NV_0), not t_0(MAX_conj), not posc(X,NV_2), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,Y).
+:- not negc(X,NV_2), succ_atom(Y,NV_2), not t_2(X,NV_0,NV_2), not s_0(NV_0), not t_0(MAX_conj), not true(NV_2), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,Y).
+:- not false(NV_2), succ_atom(Y,NV_2), not t_2(X,NV_0,NV_2), not s_0(NV_0), not t_0(MAX_conj), not true(NV_2), succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,Y).
+:- succ_atom(Y,NV_2), not t_2(X,NV_0,NV_2), not s_0(NV_0), not t_0(MAX_conj), not _ok, succ_conj(X,NV_0), not _s_0(X), not _t_2(X,NV_0,Y).
+:- not negc(X,NV_2), succ_atom(Y,NV_2), not t_2(X,NV_0,NV_2), not t_0(MAX_conj), not posc(X,NV_2), max_conj(X), not _s_0(X), not _t_2(X,NV_0,Y).
+:- not false(NV_2), succ_atom(Y,NV_2), not t_2(X,NV_0,NV_2), not t_0(MAX_conj), not posc(X,NV_2), max_conj(X), not _s_0(X), not _t_2(X,NV_0,Y).
+:- not negc(X,NV_2), succ_atom(Y,NV_2), not t_2(X,NV_0,NV_2), not t_0(MAX_conj), not true(NV_2), max_conj(X), not _s_0(X), not _t_2(X,NV_0,Y).
+:- not false(NV_2), succ_atom(Y,NV_2), not t_2(X,NV_0,NV_2), not t_0(MAX_conj), not true(NV_2), max_conj(X), not _s_0(X), not _t_2(X,NV_0,Y).
+:- succ_atom(Y,NV_2), not t_2(X,NV_0,NV_2), not t_0(MAX_conj), not _ok, max_conj(X), not _s_0(X), not _t_2(X,NV_0,Y).
+t_2(X,NV_0,Y):- not s_0(X), succ_atom(Y,NV_2).
+t_2(X,NV_0,Y):- succ_atom(Y,NV_2), not max_conj(X), not _s_0(NV_0).
+t_2(X,NV_0,Y):- not succ_conj(X,NV_0), succ_atom(Y,NV_2), not max_conj(X).
+t_2(X,NV_0,Y):- succ_atom(Y,NV_2), not ok, not _true(NV_2), posc(X,NV_2).
+t_2(X,NV_0,Y):- succ_atom(Y,NV_2), not ok, not _false(NV_2), negc(X,NV_2).
+t_2(X,NV_0,Y):- t_0(MAX_conj), succ_atom(Y,NV_2).
+ok | t_2(X,NV_0,Y):- posc(X,NV_2), true(NV_2), succ_atom(Y,NV_2), not _t_0(MAX_conj).
+ok | t_2(X,NV_0,Y):- negc(X,NV_2), false(NV_2), succ_atom(Y,NV_2), not _t_0(MAX_conj).
+t_2(X,NV_0,Y):- not ok, succ_atom(Y,NV_2), posc(X,NV_2), not _true(NV_2), not _t_0(MAX_conj).
+t_2(X,NV_0,Y):- not ok, succ_atom(Y,NV_2), negc(X,NV_2), not _false(NV_2), not _t_0(MAX_conj).
+s_0(X) | t_2(X,NV_0,Y):- not ok, succ_atom(Y,NV_2), posc(X,NV_2), not _true(NV_2).
+s_0(X) | t_2(X,NV_0,Y):- not ok, succ_atom(Y,NV_2), negc(X,NV_2), not _false(NV_2).
+s_0(X) | t_2(X,NV_0,Y):- succ_atom(Y,NV_2), not _t_0(MAX_conj).
+t_2(X,NV_0,Y):- not ok, succ_atom(Y,NV_2), not _s_0(NV_0), not max_conj(X), posc(X,NV_2), not _true(NV_2).
+t_2(X,NV_0,Y):- not ok, succ_atom(Y,NV_2), not _s_0(NV_0), not max_conj(X), negc(X,NV_2), not _false(NV_2).
+t_2(X,NV_0,Y):- succ_atom(Y,NV_2), not _t_0(MAX_conj), not _s_0(NV_0), not max_conj(X).
+t_2(X,NV_0,Y):- not ok, succ_atom(Y,NV_2), not succ_conj(X,NV_0), not max_conj(X), posc(X,NV_2), not _true(NV_2).
+t_2(X,NV_0,Y):- not ok, succ_atom(Y,NV_2), not succ_conj(X,NV_0), not max_conj(X), negc(X,NV_2), not _false(NV_2).
+t_2(X,NV_0,Y):- succ_atom(Y,NV_2), not _t_0(MAX_conj), not succ_conj(X,NV_0), not max_conj(X).
+t_2(X,NV_0,Y):- t_2(X,NV_0,NV_2), succ_atom(Y,NV_2).
+:- not s_0(X), not t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+:- not max_conj(X), not t_2(X,NV_0,Y), succ_atom(Y,NV_2), not _s_0(NV_0).
+:- not max_conj(X), not succ_conj(X,NV_0), not t_2(X,NV_0,Y), succ_atom(Y,NV_2).
+:- not ok, not t_2(X,NV_0,Y), succ_atom(Y,NV_2), posc(X,NV_2), not _true(NV_2).
+:- not ok, not t_2(X,NV_0,Y), succ_atom(Y,NV_2), negc(X,NV_2), not _false(NV_2).
+:- not t_2(X,NV_0,Y), succ_atom(Y,NV_2), not _t_0(MAX_conj).
+:- not t_2(X,NV_0,Y), succ_atom(Y,NV_2), not _t_2(X,NV_0,NV_2).
+ok | t_0(NV_0):- posc(NV_0,Y), true(Y), t_0(X), succ_conj(X,NV_0).
+ok | t_0(NV_0):- negc(NV_0,Y), false(Y), t_0(X), succ_conj(X,NV_0).
+t_0(NV_0):- not ok, t_0(X), succ_conj(X,NV_0), posc(NV_0,Y), not _true(Y).
+t_0(NV_0):- not ok, t_0(X), succ_conj(X,NV_0), negc(NV_0,Y), not _false(Y).
+:- succ_conj(X,NV_0), not ok, not t_0(NV_0), not _true(Y), posc(NV_0,Y), not _t_0(X).
+:- succ_conj(X,NV_0), not ok, not t_0(NV_0), not _false(Y), negc(NV_0,Y), not _t_0(X).
+:- not s_3(X,NV_0,MIN_atom).
+s_3(X,NV_0,Y):- succ_atom(Y,NV_3), s_3(X,NV_0,NV_3).
+s_3(X,NV_0,Y):- not succ_conj(X,NV_0).
+s_3(X,NV_0,Y):- not t_0(NV_0), not ok, not _true(Y), posc(NV_0,Y).
+s_3(X,NV_0,Y):- not t_0(NV_0), not ok, not _false(Y), negc(NV_0,Y).
+s_3(X,NV_0,Y):- not _t_0(X).
+s_3(X,NV_0,Y):- not t_0(NV_0), not ok, posc(NV_0,Y), not _true(Y), not _t_0(X).
+s_3(X,NV_0,Y):- not t_0(NV_0), not ok, negc(NV_0,Y), not _false(Y), not _t_0(X).
+s_3(X,NV_0,Y):- not t_0(NV_0), not ok, posc(NV_0,Y), not _true(Y), not _t_0(X).
+s_3(X,NV_0,Y):- not t_0(NV_0), not ok, negc(NV_0,Y), not _false(Y), not _t_0(X).
+s_3(X,NV_0,Y):- not t_0(NV_0), not ok, not succ_conj(X,NV_0), posc(NV_0,Y), not _true(Y).
+s_3(X,NV_0,Y):- not t_0(NV_0), not ok, not succ_conj(X,NV_0), negc(NV_0,Y), not _false(Y).
+s_3(X,NV_0,Y):- not _t_0(X), not succ_conj(X,NV_0).
+t_0(X) | t_3(X,NV_0,MIN_atom):- not negc(NV_0,MIN_atom), succ_conj(X,NV_0), not posc(NV_0,MIN_atom).
+t_0(X) | t_3(X,NV_0,MIN_atom):- not false(MIN_atom), succ_conj(X,NV_0), not posc(NV_0,MIN_atom).
+t_0(X) | t_3(X,NV_0,MIN_atom):- not negc(NV_0,MIN_atom), succ_conj(X,NV_0), not true(MIN_atom).
+t_0(X) | t_3(X,NV_0,MIN_atom):- not false(MIN_atom), succ_conj(X,NV_0), not true(MIN_atom).
+t_0(X) | t_3(X,NV_0,MIN_atom):- ok, succ_conj(X,NV_0).
+t_0(X) | t_3(X,NV_0,MIN_atom):- succ_conj(X,NV_0), not negc(NV_0,MIN_atom), not posc(NV_0,MIN_atom), not _ok.
+false(MIN_atom) | t_0(X) | t_3(X,NV_0,MIN_atom):- succ_conj(X,NV_0), not posc(NV_0,MIN_atom), not _ok.
+t_0(X) | t_3(X,NV_0,MIN_atom) | true(MIN_atom):- succ_conj(X,NV_0), not negc(NV_0,MIN_atom), not _ok.
+false(MIN_atom) | t_0(X) | t_3(X,NV_0,MIN_atom) | true(MIN_atom):- succ_conj(X,NV_0), not _ok.
+t_0(X) | t_3(X,NV_0,MIN_atom):- t_0(NV_0), succ_conj(X,NV_0).
+t_3(X,NV_0,MIN_atom):- not negc(NV_0,MIN_atom), not posc(NV_0,MIN_atom), not t_0(X), succ_conj(X,NV_0).
+t_3(X,NV_0,MIN_atom):- not false(MIN_atom), not posc(NV_0,MIN_atom), not t_0(X), succ_conj(X,NV_0).
+t_3(X,NV_0,MIN_atom):- not negc(NV_0,MIN_atom), not true(MIN_atom), not t_0(X), succ_conj(X,NV_0).
+t_3(X,NV_0,MIN_atom):- not false(MIN_atom), not true(MIN_atom), not t_0(X), succ_conj(X,NV_0).
+t_3(X,NV_0,MIN_atom):- not t_0(X), succ_conj(X,NV_0), not _ok.
+t_3(X,NV_0,MIN_atom):- not t_0(X), succ_conj(X,NV_0), not _t_0(NV_0).
+t_3(X,NV_0,MIN_atom):- not negc(NV_0,MIN_atom), not posc(NV_0,MIN_atom), not t_0(X), succ_conj(X,NV_0).
+t_3(X,NV_0,MIN_atom):- not false(MIN_atom), not posc(NV_0,MIN_atom), not t_0(X), succ_conj(X,NV_0).
+t_3(X,NV_0,MIN_atom):- not negc(NV_0,MIN_atom), not true(MIN_atom), not t_0(X), succ_conj(X,NV_0).
+t_3(X,NV_0,MIN_atom):- not false(MIN_atom), not true(MIN_atom), not t_0(X), succ_conj(X,NV_0).
+t_3(X,NV_0,MIN_atom):- not t_0(X), not _ok, succ_conj(X,NV_0).
+t_3(X,NV_0,MIN_atom):- not t_0(X), not _t_0(NV_0), succ_conj(X,NV_0).
+t_0(X):- not negc(NV_0,Y), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not posc(NV_0,Y).
+t_0(X):- not false(Y), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not posc(NV_0,Y).
+t_0(X):- not negc(NV_0,Y), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not true(Y).
+t_0(X):- not false(Y), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not true(Y).
+t_0(X):- ok, succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y).
+t_0(X):- succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not negc(NV_0,Y), not posc(NV_0,Y), not _ok.
+false(Y) | t_0(X):- succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not posc(NV_0,Y), not _ok.
+true(Y) | t_0(X):- succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not negc(NV_0,Y), not _ok.
+false(Y) | true(Y) | t_0(X):- succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not _ok.
+t_0(X):- t_0(NV_0), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y).
+:- not negc(NV_0,Y), not posc(NV_0,Y), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y).
+:- not false(Y), not posc(NV_0,Y), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y).
+:- not negc(NV_0,Y), not true(Y), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y).
+:- not false(Y), not true(Y), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y).
+:- not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not _ok.
+:- not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not _t_0(NV_0).
+:- not negc(NV_0,Y), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not posc(NV_0,Y), succ_conj(X,NV_0).
+:- not false(Y), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not posc(NV_0,Y), succ_conj(X,NV_0).
+:- not negc(NV_0,Y), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not true(Y), succ_conj(X,NV_0).
+:- not false(Y), t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not true(Y), succ_conj(X,NV_0).
+:- t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not _ok, succ_conj(X,NV_0).
+:- t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not _t_0(NV_0), succ_conj(X,NV_0).
+:- not negc(NV_0,Y), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not posc(NV_0,Y), succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+:- not false(Y), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not posc(NV_0,Y), succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+:- not negc(NV_0,Y), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not true(Y), succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+:- not false(Y), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not true(Y), succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+:- not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not _ok, succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+:- not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not t_0(X), not _t_0(NV_0), succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+t_0(X):- not negc(NV_0,Y), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not posc(NV_0,Y).
+t_0(X):- not false(Y), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not posc(NV_0,Y).
+t_0(X):- not negc(NV_0,Y), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not true(Y).
+t_0(X):- not false(Y), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not true(Y).
+t_0(X):- ok, succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y).
+t_0(X):- succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not negc(NV_0,Y), not posc(NV_0,Y), not _ok.
+false(Y) | t_0(X):- succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not posc(NV_0,Y), not _ok.
+true(Y) | t_0(X):- succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not negc(NV_0,Y), not _ok.
+false(Y) | true(Y) | t_0(X):- succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not _ok.
+t_0(X):- t_0(NV_0), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y).
+:- not negc(NV_0,Y), not posc(NV_0,Y), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y).
+:- not false(Y), not posc(NV_0,Y), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y).
+:- not negc(NV_0,Y), not true(Y), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y).
+:- not false(Y), not true(Y), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y).
+:- not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not _ok.
+:- not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not _t_0(NV_0).
+:- not negc(NV_0,Y), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not posc(NV_0,Y), succ_conj(X,NV_0).
+:- not false(Y), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not posc(NV_0,Y), succ_conj(X,NV_0).
+:- not negc(NV_0,Y), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not true(Y), succ_conj(X,NV_0).
+:- not false(Y), t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not true(Y), succ_conj(X,NV_0).
+:- t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not _ok, succ_conj(X,NV_0).
+:- t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not _t_0(NV_0), succ_conj(X,NV_0).
+:- not negc(NV_0,Y), max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not posc(NV_0,Y), succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+:- not false(Y), max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not posc(NV_0,Y), succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+:- not negc(NV_0,Y), max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not true(Y), succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+:- not false(Y), max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not true(Y), succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+:- max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not _ok, succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+:- max_atom(Y), s_3(X,NV_0,Y), not t_0(X), not _t_0(NV_0), succ_conj(X,NV_0), not _t_3(X,NV_0,MAX_atom).
+t_3(X,NV_0,MAX_atom):- not succ_conj(X,NV_0), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y).
+t_3(X,NV_0,MAX_atom):- not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not ok, not t_0(NV_0), not _true(Y), posc(NV_0,Y).
+t_3(X,NV_0,MAX_atom):- not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not ok, not t_0(NV_0), not _false(Y), negc(NV_0,Y).
+t_3(X,NV_0,MAX_atom):- t_0(X), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y).
+ok | t_3(X,NV_0,MAX_atom) | t_0(NV_0):- posc(NV_0,Y), true(Y), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not _t_0(X).
+ok | t_3(X,NV_0,MAX_atom) | t_0(NV_0):- negc(NV_0,Y), false(Y), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not _t_0(X).
+t_3(X,NV_0,MAX_atom) | t_0(NV_0):- not ok, not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), posc(NV_0,Y), not _true(Y), not _t_0(X).
+t_3(X,NV_0,MAX_atom) | t_0(NV_0):- not ok, not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), negc(NV_0,Y), not _false(Y), not _t_0(X).
+t_3(X,NV_0,MAX_atom):- not t_0(NV_0), not ok, not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not succ_conj(X,NV_0), posc(NV_0,Y), not _true(Y).
+t_3(X,NV_0,MAX_atom):- not t_0(NV_0), not ok, not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not succ_conj(X,NV_0), negc(NV_0,Y), not _false(Y).
+t_3(X,NV_0,MAX_atom):- not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not succ_conj(X,NV_0), not _t_0(X).
+:- not succ_conj(X,NV_0), not t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y).
+:- not t_0(NV_0), not ok, not t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), posc(NV_0,Y), not _true(Y).
+:- not t_0(NV_0), not ok, not t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), negc(NV_0,Y), not _false(Y).
+:- not t_3(X,NV_0,MAX_atom), not s_3(X,NV_0,NV_3), succ_atom(Y,NV_3), s_3(X,NV_0,Y), not _t_0(X).
+t_3(X,NV_0,MAX_atom):- not succ_conj(X,NV_0), max_atom(Y), s_3(X,NV_0,Y).
+t_3(X,NV_0,MAX_atom):- max_atom(Y), s_3(X,NV_0,Y), not ok, not t_0(NV_0), not _true(Y), posc(NV_0,Y).
+t_3(X,NV_0,MAX_atom):- max_atom(Y), s_3(X,NV_0,Y), not ok, not t_0(NV_0), not _false(Y), negc(NV_0,Y).
+t_3(X,NV_0,MAX_atom):- t_0(X), max_atom(Y), s_3(X,NV_0,Y).
+ok | t_3(X,NV_0,MAX_atom) | t_0(NV_0):- posc(NV_0,Y), true(Y), max_atom(Y), s_3(X,NV_0,Y), not _t_0(X).
+ok | t_3(X,NV_0,MAX_atom) | t_0(NV_0):- negc(NV_0,Y), false(Y), max_atom(Y), s_3(X,NV_0,Y), not _t_0(X).
+t_3(X,NV_0,MAX_atom) | t_0(NV_0):- not ok, max_atom(Y), s_3(X,NV_0,Y), posc(NV_0,Y), not _true(Y), not _t_0(X).
+t_3(X,NV_0,MAX_atom) | t_0(NV_0):- not ok, max_atom(Y), s_3(X,NV_0,Y), negc(NV_0,Y), not _false(Y), not _t_0(X).
+t_3(X,NV_0,MAX_atom):- not t_0(NV_0), not ok, max_atom(Y), s_3(X,NV_0,Y), not succ_conj(X,NV_0), posc(NV_0,Y), not _true(Y).
+t_3(X,NV_0,MAX_atom):- not t_0(NV_0), not ok, max_atom(Y), s_3(X,NV_0,Y), not succ_conj(X,NV_0), negc(NV_0,Y), not _false(Y).
+t_3(X,NV_0,MAX_atom):- max_atom(Y), s_3(X,NV_0,Y), not succ_conj(X,NV_0), not _t_0(X).
+:- not succ_conj(X,NV_0), not t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y).
+:- not t_0(NV_0), not ok, not t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), posc(NV_0,Y), not _true(Y).
+:- not t_0(NV_0), not ok, not t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), negc(NV_0,Y), not _false(Y).
+:- not t_3(X,NV_0,MAX_atom), max_atom(Y), s_3(X,NV_0,Y), not _t_0(X).
+t_0(X) | t_3(X,NV_0,NV_3):- not negc(NV_0,NV_3), succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not posc(NV_0,NV_3).
+t_0(X) | t_3(X,NV_0,NV_3):- not false(NV_3), succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not posc(NV_0,NV_3).
+t_0(X) | t_3(X,NV_0,NV_3):- not negc(NV_0,NV_3), succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not true(NV_3).
+t_0(X) | t_3(X,NV_0,NV_3):- not false(NV_3), succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not true(NV_3).
+t_0(X) | t_3(X,NV_0,NV_3):- ok, succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3).
+t_0(X) | t_3(X,NV_0,NV_3):- succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not negc(NV_0,NV_3), not posc(NV_0,NV_3), not _ok.
+false(NV_3) | t_0(X) | t_3(X,NV_0,NV_3):- succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not posc(NV_0,NV_3), not _ok.
+true(NV_3) | t_0(X) | t_3(X,NV_0,NV_3):- succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not negc(NV_0,NV_3), not _ok.
+false(NV_3) | true(NV_3) | t_0(X) | t_3(X,NV_0,NV_3):- succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not _ok.
+t_0(X) | t_3(X,NV_0,NV_3):- t_0(NV_0), succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3).
+t_3(X,NV_0,NV_3):- not negc(NV_0,NV_3), not posc(NV_0,NV_3), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3).
+t_3(X,NV_0,NV_3):- not false(NV_3), not posc(NV_0,NV_3), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3).
+t_3(X,NV_0,NV_3):- not negc(NV_0,NV_3), not true(NV_3), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3).
+t_3(X,NV_0,NV_3):- not false(NV_3), not true(NV_3), not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3).
+t_3(X,NV_0,NV_3):- not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not _ok.
+t_3(X,NV_0,NV_3):- not t_0(X), succ_conj(X,NV_0), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not _t_0(NV_0).
+t_3(X,NV_0,NV_3):- not negc(NV_0,NV_3), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not t_0(X), not posc(NV_0,NV_3), succ_conj(X,NV_0).
+t_3(X,NV_0,NV_3):- not false(NV_3), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not t_0(X), not posc(NV_0,NV_3), succ_conj(X,NV_0).
+t_3(X,NV_0,NV_3):- not negc(NV_0,NV_3), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not t_0(X), not true(NV_3), succ_conj(X,NV_0).
+t_3(X,NV_0,NV_3):- not false(NV_3), t_3(X,NV_0,Y), succ_atom(Y,NV_3), not t_0(X), not true(NV_3), succ_conj(X,NV_0).
+t_3(X,NV_0,NV_3):- t_3(X,NV_0,Y), succ_atom(Y,NV_3), not t_0(X), not _ok, succ_conj(X,NV_0).
+t_3(X,NV_0,NV_3):- t_3(X,NV_0,Y), succ_atom(Y,NV_3), not t_0(X), not _t_0(NV_0), succ_conj(X,NV_0).
+:- not negc(NV_0,NV_3), succ_atom(Y,NV_3), not t_3(X,NV_0,NV_3), not t_0(X), not posc(NV_0,NV_3), succ_conj(X,NV_0), not _t_3(X,NV_0,Y).
+:- not false(NV_3), succ_atom(Y,NV_3), not t_3(X,NV_0,NV_3), not t_0(X), not posc(NV_0,NV_3), succ_conj(X,NV_0), not _t_3(X,NV_0,Y).
+:- not negc(NV_0,NV_3), succ_atom(Y,NV_3), not t_3(X,NV_0,NV_3), not t_0(X), not true(NV_3), succ_conj(X,NV_0), not _t_3(X,NV_0,Y).
+:- not false(NV_3), succ_atom(Y,NV_3), not t_3(X,NV_0,NV_3), not t_0(X), not true(NV_3), succ_conj(X,NV_0), not _t_3(X,NV_0,Y).
+:- succ_atom(Y,NV_3), not t_3(X,NV_0,NV_3), not t_0(X), not _ok, succ_conj(X,NV_0), not _t_3(X,NV_0,Y).
+:- succ_atom(Y,NV_3), not t_3(X,NV_0,NV_3), not t_0(X), not _t_0(NV_0), succ_conj(X,NV_0), not _t_3(X,NV_0,Y).
+t_3(X,NV_0,Y):- not succ_conj(X,NV_0), succ_atom(Y,NV_3).
+t_3(X,NV_0,Y):- succ_atom(Y,NV_3), not ok, not t_0(NV_0), not _true(NV_3), posc(NV_0,NV_3).
+t_3(X,NV_0,Y):- succ_atom(Y,NV_3), not ok, not t_0(NV_0), not _false(NV_3), negc(NV_0,NV_3).
+t_3(X,NV_0,Y):- t_0(X), succ_atom(Y,NV_3).
+ok | t_3(X,NV_0,Y) | t_0(NV_0):- posc(NV_0,NV_3), true(NV_3), succ_atom(Y,NV_3), not _t_0(X).
+ok | t_3(X,NV_0,Y) | t_0(NV_0):- negc(NV_0,NV_3), false(NV_3), succ_atom(Y,NV_3), not _t_0(X).
+t_3(X,NV_0,Y) | t_0(NV_0):- not ok, succ_atom(Y,NV_3), posc(NV_0,NV_3), not _true(NV_3), not _t_0(X).
+t_3(X,NV_0,Y) | t_0(NV_0):- not ok, succ_atom(Y,NV_3), negc(NV_0,NV_3), not _false(NV_3), not _t_0(X).
+t_3(X,NV_0,Y):- not t_0(NV_0), not ok, succ_atom(Y,NV_3), not succ_conj(X,NV_0), posc(NV_0,NV_3), not _true(NV_3).
+t_3(X,NV_0,Y):- not t_0(NV_0), not ok, succ_atom(Y,NV_3), not succ_conj(X,NV_0), negc(NV_0,NV_3), not _false(NV_3).
+t_3(X,NV_0,Y):- succ_atom(Y,NV_3), not succ_conj(X,NV_0), not _t_0(X).
+t_3(X,NV_0,Y):- t_3(X,NV_0,NV_3), succ_atom(Y,NV_3).
+:- not succ_conj(X,NV_0), not t_3(X,NV_0,Y), succ_atom(Y,NV_3).
+:- not t_0(NV_0), not ok, not t_3(X,NV_0,Y), succ_atom(Y,NV_3), posc(NV_0,NV_3), not _true(NV_3).
+:- not t_0(NV_0), not ok, not t_3(X,NV_0,Y), succ_atom(Y,NV_3), negc(NV_0,NV_3), not _false(NV_3).
+:- not t_3(X,NV_0,Y), succ_atom(Y,NV_3), not _t_0(X).
+:- not t_3(X,NV_0,Y), succ_atom(Y,NV_3), not _t_3(X,NV_0,NV_3).
+true(Y):- ok, un(Y).
+false(Y):- ok, un(Y).
+:- not ok.
