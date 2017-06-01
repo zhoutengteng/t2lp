@@ -70,11 +70,7 @@ void Formula::convertToPNF() {
  */
 void Formula::convertToNNF(bool _bIsSM) {
     NNFUtils::ms_bIsSM = _bIsSM;
-   // printf("orginal--\n%s\n\n", Utils::convertFormulaToString(m_pFormula).c_str());
-    //_formula* original =  Utils::copyFormula(m_pFormula);
     m_pFormula = NNFUtils::convertToNegativeNormalForm (m_pFormula);
-    //printf("NFF--\n%s\n\n", Utils::convertFormulaToString(m_pFormula).c_str());
-   // printf("%s\n", Utils::compareFormula(original, m_pFormula) ? "the same" : "different");
 }
 /**
  * 为公式中没有量词限定的参数补上全称量词限定

@@ -33,7 +33,6 @@ private:
     SMTranslator(const SMTranslator&);
     SMTranslator& operator = (const SMTranslator&);
     ~SMTranslator();
-    
     void hengZhangTransform();
     void cabalarTransform();
     void ruleTransform();

@@ -186,48 +186,7 @@ Formula HengZhang::createFormula_3(const Formula& _originalFml) {
     return fml;
 }
 
-// // (s(_X,_Y) & ((~s(_X,_Z) & succ(_Y,_Z)) | _max(Y)))
-// _formula* HengZhang::generateFormulaLeft_4() {
-//     // 1 S(_X,_Y)
-//     _term* term_x_y = Utils::combineTerms(m_vTermsX, m_vTermsY);
-//     _formula* s_x_y = Utils::compositeToAtom(m_nSymbolS, term_x_y);
-//     // 2 ( ~S(_X,_Z)
-//     _term* term_x_z = Utils::combineTerms(m_vTermsX, m_vTermsZ);
-//     _formula* s_x_z = Utils::compositeToAtom(m_nSymbolS, term_x_z);
-//     _formula* _s_x_z = Utils::compositeByConnective(NEGA, s_x_z, NULL);
-//     // 3 succ(_Y,_Z)
-//     _term* term_y_z = Utils::combineTerms(m_vTermsY, m_vTermsZ);
-//     _formula* succ_y_z = Utils::compositeToAtom(m_nSymbolSucc, term_y_z);
-//     // 4 max_domian(_Y)
-//     vector<Formula> max_ys;
-//     for (unsigned int i = 0; i < m_vTermsY.size(); ++ i) {
-//         string name = string("max_") + Vocabulary::instance().getVariableDomain(m_vTermsY[i]);
-//         _term* term_yi = (_term*)malloc(sizeof(_term));
-//         term_yi->term_type = VARI;
-//         term_yi->variable_id = m_vTermsY[i];
-//         int pre_id = Vocabulary::instance().addSymbol(name.c_str(), PREDICATE, 1);
-//         _formula* max_yi = Utils::compositeToAtom(pre_id, term_yi);
-//         Formula f = Formula(max_yi, false);
-//         max_ys.push_back(f);
-//         Vocabulary::instance().addAtom(f);
-//     }
-//     _formula* max_y = Utils::copyFormula(max_ys[0].getFormula());
-//     for (unsigned int i = 1; i < max_ys.size(); ++ i) {
-//         max_y = Utils::compositeByConnective(CONJ, max_y, Utils::copyFormula(max_ys[i].getFormula()));
-//     }
-//     _formula* lrl = Utils::compositeByConnective(CONJ, _s_x_z, succ_y_z);
-//     _formula* lr = Utils::compositeByConnective(DISJ, lrl, max_y);
-//     _formula* l = Utils::compositeByConnective(CONJ, s_x_y, lr);
-// //    _formula* lrl = Utils::compositeByConnective(CONJ, succ_y_z, s_x_y);
-// //    _formula* ll = Utils::compositeByConnective(CONJ, lrl, _s_x_z);
-// //    _formula* l = Utils::compositeByConnective(DISJ, ll, max_y);
-//     return l;
-// }
-//
-
-
-
-/*repalce by zhoutengteng*/ 
+ 
 //  (s(_X,_Y) & ((~s(_X,_Z) & succ(_Y,_Z)) | _max(_Y)))
 _formula* HengZhang::generateFormulaLeft_4() {
     // 1 S(_X,_Y)
@@ -257,48 +216,17 @@ _formula* HengZhang::generateFormulaLeft_4() {
     for (unsigned int i = 1; i < max_ys.size(); ++ i) {
         max_y = Utils::compositeByConnective(CONJ, max_y, Utils::copyFormula(max_ys[i].getFormula()));
     }
-    //  (~(succ(_Y,_Z) & S(_X,_Z)) & S(_X, _Y) )
-    // _formula* lrl = Utils::compositeByConnective(CONJ, s_x_z, succ_y_z);
-    // _formula* lrln = Utils::compositeByConnective(NEGA, lrl, NULL);
-    // _formula* l = Utils::compositeByConnective(CONJ, lrln, s_x_y);
-
     // (s(_X,_Y) & ((~s(_X,_Z) & succ(_Y,_Z)) | _max(Y)))
     _formula* lrl = Utils::compositeByConnective(CONJ, _s_x_z, succ_y_z);
     _formula* lr = Utils::compositeByConnective(DISJ, lrl, max_y);
     _formula* l = Utils::compositeByConnective(CONJ, s_x_y, lr);
 
-    //  ((succ(_Y,_Z) & ~S(_X,_Z)) & S(_X, _Y) )
-    // _formula* lrl = Utils::compositeByConnective(CONJ, _s_x_z, succ_y_z);
-    // _formula* l = Utils::compositeByConnective(CONJ, lrl, s_x_y);
 
     return l;
 }
 
 
-/**
- * 章衡量词消去公式四_1    (s(_X,_Y) & ((~s(_X,_Z) & succ(_Y,_Z)) | _max(Y))) 
- *                              -> (t(_X,_MAX) -> theta(_X,_Y)) 
- * @param originalFml 一阶语句
- * @return 
- */
-// Formula HengZhang::createFormula_4_1(const Formula& _originalFml) {
-//     // 5 T(_X,_MAX)
-//     _term* term_x_max = Utils::combineTerms(m_vTermsX, m_vTermsMAX);
-//     _formula* t_x_max  = Utils::compositeToAtom(m_nSymbolT, term_x_max);
-//     // 6 theta(_X,_Y)
-//     _formula* theta_x_y  = Utils::copyFormula(_originalFml.getFormula());
-    
-//     _formula* left = generateFormulaLeft_4();
-//     _formula* right = Utils::compositeByConnective(IMPL, t_x_max, theta_x_y);
-    
-//     _formula* F = Utils::compositeByConnective(IMPL, left, right);
-    
-//     Formula fml = Formula(F, false);
-//     return fml;
-// }
 
-
-/*replace by zhoutengteng*/
 
  /**
  * 章衡量词消去公式四_1    (s(_X,_Y) & ((~s(_X,_Z) & succ(_Y,_Z)) | _max(Y)))
@@ -326,30 +254,7 @@ Formula HengZhang::createFormula_4_1(const Formula& _originalFml) {
 
 
 
-// /**
-//  * 章衡量词消去公式四_2    (s(_X,_Y) & ((~s(_X,_Z) & succ(_Y,_Z)) | _max(Y))) 
-//  *                              -> (theta(_X,_Y) -> t(_X,_MAX)) 
-//  * @param originalFml 一阶语句
-//  * @return 
-//  */
-// Formula HengZhang::createFormula_4_2(const Formula& _originalFml) {
-//     // 5 theta(_X,_Y)
-//     _formula* theta_x_y  = Utils::copyFormula(_originalFml.getFormula());
-//     // 6 T(_X,_MAX)
-//     _term* term_x_max = Utils::combineTerms(m_vTermsX, m_vTermsMAX);
-//     _formula* t_x_max  = Utils::compositeToAtom(m_nSymbolT, term_x_max);
-    
-//     _formula* left = generateFormulaLeft_4();
-//     _formula* right = Utils::compositeByConnective(IMPL, theta_x_y, t_x_max);
-    
-//     _formula* F = Utils::compositeByConnective(IMPL, left, right);
-    
-//     Formula fml = Formula(F, false);
-//     return fml;
-// }
 
-
-/*replace by zhoutengteng*/
 /**
  * 章衡量词消去公式四_2    (s(_X,_Y) & ((~s(_X,_Z) & succ(_Y,_Z)) | _max(Y)))
  *                              -> (theta(_X,_Y) -> t(_X,_MAX)) 

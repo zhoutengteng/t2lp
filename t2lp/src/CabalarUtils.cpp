@@ -674,13 +674,13 @@ Formulas* CabalarUtils::transform(_formula* _originalFml) {
     	//start of Commutative missing Translation
     	if (subformula_l->formula_type == ATOM) {
                 //L1 TRUE->G ------> G
-    //	    if (subformula_l->predicate_id == PRED_TRUE) {
-    //                _formula* temp1 = implLeftTrue(_originalFml);
-    //                Formula temp2(temp1, false);
-    //                Formulas* ffs = new Formulas();
-    //                ffs->pushBack(temp2);
-    //                return ffs;
-    //	    }
+    	    if (subformula_l->predicate_id == PRED_TRUE) {
+                    _formula* temp1 = implLeftTrue(_originalFml);
+                    Formula temp2(temp1, false);
+                    Formulas* ffs = new Formulas();
+                    ffs->pushBack(temp2);
+                    return ffs;
+    	    }
     	    //L2 FALSE->G ------> ALWAYS BE TRUE
     	    if (subformula_l->predicate_id == PRED_FALSE) {
                     _formula* temp1 = implLeftFalse(_originalFml);
@@ -716,13 +716,13 @@ Formulas* CabalarUtils::transform(_formula* _originalFml) {
         //R1
         if (subformula_r->formula_type == ATOM) {
             //R1 F->FALSE -------->~F
-//            if (subformula_r->predicate_id == PRED_FALSE) {
-//                _formula* temp1 = implRightFalse(_originalFml);
-//                Formula temp2(temp1, false);
-//                Formulas* ffs = new Formulas();
-//                ffs->pushBack(temp2);
-//                return ffs;
-//            }
+            if (subformula_r->predicate_id == PRED_FALSE) {
+                _formula* temp1 = implRightFalse(_originalFml);
+                Formula temp2(temp1, false);
+                Formulas* ffs = new Formulas();
+                ffs->pushBack(temp2);
+                return ffs;
+            }
             //R2 F->TRUE --------->ALWAYS BE TRUE
             if (subformula_r->predicate_id == PRED_TRUE) {
                 _formula* temp1 = implRightTrue(_originalFml);

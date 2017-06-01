@@ -111,12 +111,6 @@ void Rule::aspModify() {
         }
         
         bool flag = false;
-//        if ((headPart->formula_type == NEGA && (headPart->subformula_l->formula_type == NEGA)) 
-//                || 
-//                (cur->predicate_id >= 0 && 
-//                        ! Vocabulary::instance()
-//                                .isIntensionPredicate(cur->predicate_id))) {
-        // /*modify by zhoutengteng*/ //
         if ((headPart->formula_type == NEGA) 
                 || 
                 (cur->predicate_id >= 0 && 

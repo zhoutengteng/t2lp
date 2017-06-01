@@ -108,8 +108,8 @@ void yyerror(const char* s) {
 
 /* In a future release of Bison, this section will be replaced
    by #include "parse.h".  */
-#ifndef YY_YY_SRC_PARSE_H_INCLUDED
-# define YY_YY_SRC_PARSE_H_INCLUDED
+#ifndef YY_YY_INCLUDE_PARSE_H_INCLUDED
+# define YY_YY_INCLUDE_PARSE_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -199,7 +199,7 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_SRC_PARSE_H_INCLUDED  */
+#endif /* !YY_YY_INCLUDE_PARSE_H_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 

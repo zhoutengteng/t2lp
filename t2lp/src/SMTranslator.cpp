@@ -34,8 +34,6 @@ SMTranslator& SMTranslator::instance() {
 void SMTranslator::init(const Formula& _originalFml) {
     destroy();
     m_pOriginalFormulas = _originalFml.divideFormula();
-    // m_pOriginalFormulas =  new Formulas();
-    // m_pOriginalFormulas->pushBack(_originalFml);
     printf("\nthe prenex formulas\n\n");
     m_pOriginalFormulas->convertToPNF();
     m_pOriginalFormulas->output(stdout);
@@ -224,13 +222,6 @@ void SMTranslator::outputAddition(FILE* _out) const {
         fprintf(_out, ":- not ");
         Utils::printAtom(iter->getFormula(), _out);        
         fprintf(_out, ".\n");
-        // :- not _p(X), p(X).
-//        fprintf(_out, ":- not ");
-//        fprintf(_out, "_");
-//        Utils::printAtom(iter->getFormula(), _out);
-//        fprintf(_out, ", ");
-//        Utils::printAtom(iter->getFormula(), _out); 
-//        fprintf(_out, ".\n");
     }
     fprintf(_out, "\n%%Extension predicate define\n");
     for(FORMULAS_CONST_ITERATOR iter = Vocabulary::instance().getAtomList()->begin(); 
@@ -241,13 +232,6 @@ void SMTranslator::outputAddition(FILE* _out) const {
             fprintf(_out, ":- not ");
             Utils::printAtom(iter->getFormula(), _out);
             fprintf(_out, ".\n");
-            //p|_p
-//            if (! Vocabulary::instance().isSuccOrMax(iter->getFormula()->predicate_id)) {
-//                Utils::printAtom(iter->getFormula(), _out);
-//                fprintf(_out, " | _");
-//                Utils::printAtom(iter->getFormula(), _out);
-//                fprintf(_out, ".\n");
-//            }
         }
     }
     fprintf(_out, "\n%%Succ predicate definition\n");

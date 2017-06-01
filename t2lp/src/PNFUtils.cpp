@@ -142,10 +142,6 @@ void PNFUtils::extractQuantifier_IMPL_CONJ_DISJ(_formula* _fml) {
             sub_r->subformula_r = sub_r->subformula_l;
             sub_r->subformula_l = sub_l;
         }
-        // printf("middle \n");
-        // Utils::outputFormula(stdout, curr_fml);
-        // printf("\n");
-
         curr_fml = curr_fml->subformula_l;
         sub_l = curr_fml->subformula_l;
         sub_r = curr_fml->subformula_r;
