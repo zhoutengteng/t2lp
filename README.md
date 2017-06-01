@@ -23,10 +23,10 @@ Table Results
 We list the result of  t2lp+claspD and t2lp+dlv on two problems
 
 clique problem
-![Alt text](./t2lp/color/color.png)
+![Alt text](./testSH/color/color.png)
 
 qsat problem
-![Alt text](./t2lp/qsat/qsat.png)
+![Alt text](./testSH/qsat/qsat.png)
 
 
 
