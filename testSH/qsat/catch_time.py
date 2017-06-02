@@ -57,11 +57,10 @@ def main():
     ws.range("K1", "L1").merge()
     ws[1][2].value = "n"
     ws[1][3].value = "实例一"
-    ws[1][3].value = "实例二"
-    ws[1][5].value = "实例三"
-    ws[1][7].value = "实例四"
-    ws[1][9].value = "实例五"
-    ws[1][11].value = "实例六"
+    ws[1][5].value = "实例二"
+    ws[1][7].value = "实例三"
+    ws[1][9].value = "实例四"
+    ws[1][11].value = "实例五"
     ws[2][3].value = "t2lp+claspD"
     ws[2][4].value = "t2lp+dlv"
     ws[2][5].value = "t2lp+claspD"
@@ -86,8 +85,8 @@ def main():
         i2 = 0
         for v_ in v:
             out.write('|' + str(v_) + ' ' + str(dlvSave[k][i]) + '|')
-            ws[ws_line][3+i2].value = v_
-            ws[ws_line][4+i2].value = dlvSave[k][i]
+            ws[ws_line][3+i2].value = v_ if (v_ < 480) else ">480s"
+            ws[ws_line][4+i2].value = dlvSave[k][i]  if (dlvSave[k][i]  < 480) else ">480s" 
             i = i + 1
             i2 = i2 + 2
         out.write('|\n')

@@ -13,7 +13,7 @@ void main()
 	struct timeval start, end;
 	double time;
 	srand(8793);
-	for (k=5; k<=30; k+=5)
+	for (k=5; k<=35; k+=5)
 	{
 		for (n=1; n<=5; n++)
 		{
@@ -53,7 +53,7 @@ void main()
 			fclose(outd);
 
 			sprintf(logfile, "color%d_to.log", p);
-			sprintf(strbuf, "gringo colorfactclaspD%d_%d.lp color_claspD.lp | claspD  >> %s",  k, n, logfile);
+			sprintf(strbuf, " gringo colorfactclaspD%d_%d.lp color_claspD.lp | timeout 480 claspD  >> %s",  k, n, logfile);
 			log = fopen(logfile, "a+");
 			fprintf(log, "\n%s\n", strbuf);
 			printf("\n%s\n", strbuf);
@@ -67,7 +67,7 @@ void main()
 			printf("ClaspD cost %f seconds.\n", time);
 			fclose(log);
 
-			sprintf(strbuf, "timeout 60 ./dlv -n=1 -filter=clr colorfactDLV%d_%d.lp color_dlv.lp >> %s", k, n, logfile);
+			sprintf(strbuf, "timeout 480 ./dlv -n=1 -filter=clr colorfactDLV%d_%d.lp color_dlv.lp >> %s", k, n, logfile);
 			log = fopen(logfile, "a+");
 			fprintf(log, "\n%s\n", strbuf);
 			printf("\n%s\n", strbuf);

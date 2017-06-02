@@ -48,45 +48,202 @@ testSH/*  ----------------------additional result, such examine time, random tes
 
 Code details simple version
 ============
-1 词法分析，语法分析，把输入的公式，存入Formula类
+#### 词法分析，语法分析，把输入的公式，存入Formula类
 
-2 将Formula的整条公式，拆分成子公式存入Formulas（双向列表deque）中
+#### 将Formula的整条公式，拆分成子公式存入Formulas（双向列表deque）中
 
-3 将公式化成前缀范式
+#### 将公式化成前缀范式
 
-4 将公式化成否定范式
+#### 将公式化成否定范式
 
-5 采用章衡量词消去的方法（使用到前缀范式，因为全称需要量词补全）
+#### 采用章衡量词消去的方法（使用到前缀范式，因为全称需要量词补全）
 
-6 将公式应用cabalar转换（对产生的否定式，采用否定范式进一步处理）
+#### 将公式应用cabalar转换（对产生的否定式，采用否定范式进一步处理）
 
-7 将公式转成asp（将头部的外延谓词，加上not移入体部，将头部的否定式，加上not移入体部）
+#### 将公式转成asp（将头部的外延谓词，加上not移入体部，将头部的否定式，加上not移入体部）
 
 
 Code details complex version
 ============
-1 词法分析和语法分析，把输入的公式，存入Formula类
-+ 具体编译设计
-描述，各种词法定义和语法定义
+#### 词法分析和语法分析
+
+
+
++ 类型词法
+
+|类型| 正则表达式| 标识|
+| ------------- |:-------------:| -----:|
+|谓词| [a-z][a-zA-Z0-9_]* |S_PRED|
+|函词 |[a-z][a-zA-Z0-9_]*| S_FUNC
+|变量| [A-Z][a-zA-Z0-9_]* |S_VARI|
+
++ 符号词法
+
+|类型 |正则表达式 |标识|
+| ------------- |:-------------:| -----:|
+|否定 |~| S_NEGA|
+|合取 |& |S_CONJ|
+|析取 | &#124; |S_DISJ|
+|蕴含| ->| S_IMPL|
+|全称| !| S_UNIV|
+|存在 |? |S_EXIS|
+|句号 |. |PREIOD|
+|左圆括号| ( |LPAREN|
+|右园括号| ) |RPAREN|
+|左方括号| [ |LBRACKET|
+|右方括号 |] |RBRACKET|
+|逗号| , |COMMA|
+|等号 |=| EQUAL|
+|宏| # |MARCO|
+
+
+
++ 词法符号类型
+
+|数据类型| 值| 注释|
+| ------------- |:-------------:| -----:|
+|SYMBOL_TYPE| PREDICATE| 谓词|
+|SYMBOL_TYPE| FUNCTION |函词|
+|SYMBOL_TYPE| VARIABLE |变量|
+
+
++ 语法分析
+
+formulas　: formulas formula PERIOD　｜　formula PERIOD
+
+formula　: formula S_CONJ formula | formula S_DISJ formula　| formula S_IMPL formula　| S_NEGA formula 　| LBRACKET S_UNIV S_VARI RBRACKET formula | LBRACKET S_EXIS S_VARI RBRACKET formula　| atom　| LPAREN formula RPAREN
+
+atom: S_PRED LPAREN terms RPAREN　| S_PRED
+
+terms　: terms COMMA term　| term
+
+term	: INTEGER　| S_FUNC　| S_FUNC LPAREN terms RPAREN　
+
++ 参数类型
+
+|数据类型| 值 |注释|
+|------------- |:-------------:| -----:|
+|TERM_TYPE|VARI|变量参数|
+|TERM_TYPE| FUNC| 函数参数|
+
++ 公式类型
+
+|数据类型 |值 |注释|
+|------------- |:-------------:| -----:|
+|FORMULA_TYPE |ATOM |原子命题|
+|FORMULA_TYPE| NEGA |函数参数|
+|FORMULA_TYPE| UNIV |全称量词|
+|FORMULA_TYPE| EXIS |存在量词|
+|FORMULA_TYPE| CONJ |合取式|
+|FORMULA_TYPE| DISJ |析取式|
+|FORMULA_TYPE| IMPL| 蕴含式|
+
+
++ 公式数据结构
+
+<pre>
+typedef struct formula {
+    FORMULA_TYPE formula_type;
+
+    union {
+        formula* subformula_l;   //NEGA,CONJ,DISJ,IMPL,UNIV,EXIS
+        int predicate_id;                 //ATOM
+    };
+    union {
+        formula* subformula_r;   //CONJ,DISJ,IMPL
+        int variable_id;                  //UNIV,EXIS
+        struct term* parameters;        //ATOM
+    };
+}_formula;
+
+</pre>
+
+
+
 + Formula存储公式的结构
-描述各类公式如何存储方式
 
-2.拆分公式
 
-3.前缀范式
-+ 补全全程量词，一步一步将量词提到前面（不是一步到位），对蕴含式特殊处理一步，以致于能同时处理合取和析取和蕴含
+atom =====> formula_type = ATOM, predicate_id = id, parameters = some_parameters
 
-4.否定范式
+nega =====> formula_type = NEGA, subformula_l = other_formula
+
+univ =====> formula_type = UNIV, subformula_l = other_formula, variable_id = id
+
+exis =====> formula_type = Exis, subformula_l = other_formula, variable_id = id
+
+conj =====> formula_type = CONJ, subformula_l = left_formula, subformula_r = right_fourm
+
+disj =====> formula_type = DISJ, subformula_l = left_formula, subformula_r = right_fourm
+
+
+impl =====> formula_type = IMPL, subformula_l = left_formula, subformula_r = right_fourm
+
+
+
+
+#### 拆分公式
+
+根据合取公式，拆成若干个子公式，存入deque中　
+
+#### 前缀范式
+
+补全全程量词，一步一步将量词提到前面（不是一步到位），对蕴含式特殊处理一步，以致于能同时处理合取和析取和蕴含
+
+for example :[!X]p(X) | [?X]q(X) => [!X][?PN_0](p(X) | q(PN_0)
+
+第一步
+[!X]p(X) | [?X]q(X)　=> [!X](p(X) | [?PN_0]q(PN_0))
+
+第二步
+[!X](p(X) | [?PN_0]q(PN_0)) =>[!X][?PN_0](p(X) | q(PN_0)
+
+#### 否定范式
 注意稳态下~~fml不用化简
 
-5.章衡量词消去
+#### 章衡量词消去
 + 新产生的公式，也要进行再一次处理（也许存在存在量词），所以章衡量词消去是递归处理
 新产生的s和t也放入内涵谓词
 
-6.cabalar转换
+#### cabalar转换
 + 因为公式的左端都是复杂的，所以先要移动公式，使得左端都要复杂公式（复杂公式包括）
 
-7.asp
+| | 在根节点左子树|在根节点右子树 |
+|------- |:---------:| ---:|
+|当前节点的左节点 | 情况 1<br> 当前左公式<-根的右公式<br>根的右公式<-跟的左公式<br>根的左公式<-特殊子公式|情况 2<br>当前左公式<-根的左公式<br>根的左公式<-特殊子公式 |
+|当前节点的右节点 | 情况 3<br>当前右公式<-根的右公式<br>根的右公式<-跟的左公式<br>根的左公式<-特殊子公式| 情况 4<br>当前右公式<-根的左公式<br>根的左公式<-特殊子公式|
+
+情况 1
+
+<pre>
+(true & c)当前节点，(true & c) & d父节点　
+(true & c) & d
+(d & c) & d
+(d　& c) & (d & c)
+true & (d & c)
+</pre>
+
+情况 2
+<pre>
+ (true & b)当前节点　a & (true & b)父节点
+ a & (true & b)
+ true & (a & b)
+</pre>
+
+情况 3
+<pre>
+ (c & true) & d
+ (c & d) &  d
+ (c　& d) & (c & d)
+ true & (c & d)
+</pre>
+
+情况 4
+<pre>
+a & (b & true)
+true & (b & a)
+</pre>
+
+#### asp
 + 对succ的翻译，将头部的外延谓词，加上not移入体部，将头部的否定式，加上not移入体部
 
 

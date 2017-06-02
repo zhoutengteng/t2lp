@@ -81,9 +81,9 @@ void main()
 	FILE *outc, *outd, *qbf;
 	struct timeval start, end;
 	double time;
-	int num_var[] = {5, 10, 15, 20, 25, 30};
-	int num_ccl[] = {5, 10, 15, 20, 25, 30};
-	int num_dcl[] = {5, 10, 15, 20, 25,30};
+	int num_var[] = {5, 10, 15, 20, 25, 30,35};
+	int num_ccl[] = {5, 10, 15, 20, 25, 30,35};
+	int num_dcl[] = {5, 10, 15, 20, 25,30,35};
 
 	srand(8594);
 
@@ -187,7 +187,7 @@ void main()
 
 			sprintf(logname, "qt2122.log");
 
-			sprintf(strbuf, "gringo qsatclaspD%d_%d.lp qsat_claspD.lp | claspD  >> %s", num_var[m], n, logname);
+			sprintf(strbuf, "gringo qsatclaspD%d_%d.lp qsat_claspD.lp | timeout 480 claspD  >> %s", num_var[m], n, logname);
 			qbf = fopen(logname, "a+");
 			fprintf(qbf, "\n%s\n", strbuf);
 			printf("\n%s\n", strbuf);
@@ -201,7 +201,7 @@ void main()
 			printf("ClaspD cost %f seconds.\n", time);
 			fclose(qbf);
 
-			sprintf(strbuf, "timeout 60 ./dlv -n=1 -filter=true qsatdlv%d_%d.lp qsat_dlv.lp >> %s", num_var[m], n, logname);
+			sprintf(strbuf, "timeout 480 ./dlv -n=1 -filter=true qsatdlv%d_%d.lp qsat_dlv.lp >> %s", num_var[m], n, logname);
 			qbf = fopen(logname, "a+");
 			fprintf(qbf, "\n%s\n", strbuf);
 			printf("\n%s\n", strbuf);
