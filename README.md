@@ -48,7 +48,7 @@ testSH/*  ----------------------additional result, such examine time, random tes
 
 Code details simple version
 ============
-## 词法分析，语法分析，把输入的公式，存入Formula类
+### 词法分析，语法分析，把输入的公式，存入Formula类
 
 #### 将Formula的整条公式，拆分成子公式存入Formulas（双向列表deque）中
 
