@@ -137,3 +137,6 @@ Project Target=t2lp,t2lp
 Use External Terminal=false
 Working Directory=
 isExecutable=false
+
+[Project]
+VersionControlSupport=kdevgit
