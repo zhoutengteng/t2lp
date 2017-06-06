@@ -202,7 +202,8 @@ Note that ~~fml does not need to be simplified in stable modle
 ###  Using the method of hengZhang's Quantifier Elimination
 + The new formula will also be dealt with again (perhaps there are existential quantifiers generated), so the elimination of the quantifier is recursive, and the newly generated S and T are also put into intensional predicates
 
-### cabalar转换
+### cabalar transformation
+
 + Since the left end of the formula is complex, it is necessary to move the formula so that the left end is complex
 
 | | left  tree at root node|right  tree at root node |
